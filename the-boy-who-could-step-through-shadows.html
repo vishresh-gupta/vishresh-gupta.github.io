@@ -1,0 +1,1020 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Boy Who Could Step Through Shadows</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-night: #050810;
+    --void: #080c1a;
+    --shadow-blue: #0d1533;
+    --electric-blue: #3d7fff;
+    --lightning: #7ab8ff;
+    --gold: #f5c842;
+    --warm-gold: #e8a020;
+    --mist: #c8d8f0;
+    --text: #d0ddf5;
+    --glow: rgba(61, 127, 255, 0.4);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--deep-night);
+    color: var(--text);
+    font-family: 'Lora', Georgia, serif;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* Star field background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(61,127,255,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 70%, rgba(100,50,180,0.08) 0%, transparent 60%),
+      radial-gradient(1px 1px at 15% 25%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 45% 15%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 40%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 65%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 20%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 80%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 10% 85%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 65% 55%, rgba(255,255,255,0.5) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ===================== COVER ===================== */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 60px 20px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(61,127,255,0.15) 0%, transparent 70%);
+    animation: pulse-bg 4s ease-in-out infinite;
+  }
+
+  @keyframes pulse-bg {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+
+  .portal-ring {
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    border: 3px solid var(--electric-blue);
+    box-shadow:
+      0 0 30px var(--electric-blue),
+      0 0 80px rgba(61,127,255,0.3),
+      inset 0 0 30px rgba(61,127,255,0.1);
+    animation: portal-spin 8s linear infinite, portal-flicker 2s ease-in-out infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .portal-ring::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 1px solid rgba(122,184,255,0.3);
+    animation: portal-spin 12s linear infinite reverse;
+  }
+
+  @keyframes portal-spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  @keyframes portal-flicker {
+    0%, 100% { box-shadow: 0 0 30px var(--electric-blue), 0 0 80px rgba(61,127,255,0.3); }
+    50% { box-shadow: 0 0 50px var(--electric-blue), 0 0 120px rgba(61,127,255,0.5), 0 0 200px rgba(61,127,255,0.2); }
+  }
+
+  .cover-title {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 10px;
+    animation: fade-down 1.2s ease both;
+  }
+
+  .cover-title .the-boy {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    font-weight: 600;
+    color: var(--mist);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(200,216,240,0.5);
+    margin-bottom: 4px;
+  }
+
+  .cover-title .could-step {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 400;
+    color: var(--lightning);
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .cover-title .shadows {
+    display: block;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(3.5rem, 10vw, 6rem);
+    font-weight: 900;
+    color: var(--mist);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-shadow:
+      0 0 20px rgba(200,216,240,0.8),
+      0 0 60px rgba(61,127,255,0.6),
+      0 4px 15px rgba(0,0,0,0.8);
+    animation: shadow-glow 3s ease-in-out infinite;
+  }
+
+  @keyframes shadow-glow {
+    0%, 100% { text-shadow: 0 0 20px rgba(200,216,240,0.8), 0 0 60px rgba(61,127,255,0.6), 0 4px 15px rgba(0,0,0,0.8); }
+    50% { text-shadow: 0 0 30px rgba(200,216,240,1), 0 0 100px rgba(61,127,255,0.8), 0 4px 15px rgba(0,0,0,0.8); }
+  }
+
+  .cover-subtitle {
+    position: relative;
+    z-index: 2;
+    margin-top: 30px;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-shadow: 0 0 15px rgba(245,200,66,0.6);
+    animation: fade-up 1.4s ease 0.3s both;
+  }
+
+  .cover-author {
+    position: relative;
+    z-index: 2;
+    margin-top: 12px;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 25px rgba(245,200,66,0.7);
+    animation: fade-up 1.6s ease 0.5s both;
+  }
+
+  @keyframes fade-down {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.5;
+    animation: float 2s ease-in-out infinite;
+    z-index: 2;
+  }
+
+  .scroll-hint span {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--lightning);
+  }
+
+  .scroll-hint::after {
+    content: '↓';
+    font-size: 1.2rem;
+    color: var(--lightning);
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ===================== MAIN LAYOUT ===================== */
+  .book-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===================== CHAPTERS ===================== */
+  .chapter {
+    margin-bottom: 80px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: reveal 0.8s ease forwards;
+  }
+
+  .chapter:nth-child(1) { animation-delay: 0.1s; }
+  .chapter:nth-child(2) { animation-delay: 0.2s; }
+  .chapter:nth-child(3) { animation-delay: 0.3s; }
+  .chapter:nth-child(4) { animation-delay: 0.4s; }
+  .chapter:nth-child(5) { animation-delay: 0.5s; }
+  .chapter:nth-child(6) { animation-delay: 0.6s; }
+  .chapter:nth-child(7) { animation-delay: 0.7s; }
+  .chapter:nth-child(8) { animation-delay: 0.8s; }
+  .chapter:nth-child(9) { animation-delay: 0.9s; }
+
+  @keyframes reveal {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .chapter-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--electric-blue);
+    margin-bottom: 8px;
+    opacity: 0.8;
+  }
+
+  .chapter-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 30px;
+    line-height: 1.3;
+    text-shadow: 0 0 20px rgba(245,200,66,0.3);
+    position: relative;
+    padding-bottom: 18px;
+  }
+
+  .chapter-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--electric-blue), transparent);
+    box-shadow: 0 0 10px var(--electric-blue);
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(61,127,255,0.4), transparent);
+    margin: 60px 0;
+  }
+
+  /* ===================== PARAGRAPH STYLES ===================== */
+  .chapter p {
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 1.4em;
+    line-height: 1.9;
+  }
+
+  .chapter p.dramatic {
+    font-size: 1.15rem;
+    color: var(--mist);
+    font-style: italic;
+    border-left: 2px solid var(--electric-blue);
+    padding-left: 20px;
+    margin: 28px 0;
+    box-shadow: -4px 0 15px rgba(61,127,255,0.2);
+  }
+
+  .chapter p.revelation {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    color: var(--lightning);
+    margin: 32px 0;
+    text-shadow: 0 0 15px rgba(122,184,255,0.5);
+  }
+
+  .chapter p.whisper {
+    font-size: 0.95rem;
+    color: rgba(200,216,240,0.7);
+    font-style: italic;
+    text-align: center;
+  }
+
+  /* Short punchy lines */
+  .punch-line {
+    display: block;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: var(--mist);
+    letter-spacing: 0.05em;
+    margin: 16px 0;
+  }
+
+  /* ===================== INTRO PAGE ===================== */
+  .intro-page {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(180deg, rgba(13,21,51,0.6) 0%, transparent 100%);
+    border-radius: 4px;
+    margin-bottom: 80px;
+    border: 1px solid rgba(61,127,255,0.15);
+  }
+
+  .intro-page .rain-line {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--lightning);
+    margin-bottom: 30px;
+    opacity: 0.7;
+  }
+
+  /* ===================== SUMMARY BOX ===================== */
+  .summary-box {
+    background: linear-gradient(135deg, rgba(13,21,51,0.8) 0%, rgba(8,12,26,0.9) 100%);
+    border: 1px solid rgba(61,127,255,0.3);
+    border-radius: 4px;
+    padding: 40px;
+    margin: 60px 0;
+    position: relative;
+    box-shadow: 0 0 40px rgba(61,127,255,0.1), inset 0 0 40px rgba(0,0,0,0.3);
+  }
+
+  .summary-box::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 20px; right: 20px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--electric-blue), transparent);
+    box-shadow: 0 0 15px var(--electric-blue);
+  }
+
+  .summary-box h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--electric-blue);
+    margin-bottom: 24px;
+  }
+
+  .summary-box ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .summary-box ul li {
+    padding: 10px 0 10px 28px;
+    position: relative;
+    font-size: 1rem;
+    color: var(--mist);
+    border-bottom: 1px solid rgba(61,127,255,0.1);
+    line-height: 1.6;
+  }
+
+  .summary-box ul li:last-child { border-bottom: none; }
+
+  .summary-box ul li::before {
+    content: '◈';
+    position: absolute;
+    left: 0;
+    color: var(--electric-blue);
+    font-size: 0.8em;
+    top: 12px;
+  }
+
+  .summary-box .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 24px 0 12px;
+  }
+
+  /* ===================== TRAINING RULES ===================== */
+  .rules-block {
+    background: rgba(61,127,255,0.05);
+    border-left: 3px solid var(--electric-blue);
+    padding: 28px 32px;
+    margin: 32px 0;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.3), -4px 0 30px rgba(61,127,255,0.15);
+  }
+
+  .rules-block h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--lightning);
+    margin-bottom: 18px;
+  }
+
+  .rules-block ol {
+    padding-left: 24px;
+  }
+
+  .rules-block ol li {
+    font-size: 1.05rem;
+    color: var(--mist);
+    margin-bottom: 12px;
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  /* ===================== BACK COVER ===================== */
+  .back-cover {
+    padding: 60px 40px;
+    background: linear-gradient(135deg, rgba(8,12,26,0.95) 0%, rgba(13,21,51,0.95) 100%);
+    border: 1px solid rgba(61,127,255,0.2);
+    border-radius: 4px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 80px;
+  }
+
+  .back-cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(61,127,255,0.08) 0%, transparent 70%);
+    animation: pulse-bg 5s ease-in-out infinite;
+  }
+
+  .back-cover .bc-headline {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    color: var(--gold);
+    line-height: 1.4;
+    margin-bottom: 30px;
+    text-shadow: 0 0 20px rgba(245,200,66,0.4);
+    position: relative;
+    z-index: 1;
+  }
+
+  .back-cover .bc-body {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--text);
+    max-width: 560px;
+    margin: 0 auto 30px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .back-cover .bc-callout {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: var(--lightning);
+    margin: 30px 0 20px;
+    letter-spacing: 0.05em;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 0 15px rgba(122,184,255,0.5);
+  }
+
+  .bc-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 480px;
+    text-align: left;
+    position: relative;
+    z-index: 1;
+  }
+
+  .bc-bullets li {
+    padding: 10px 0 10px 30px;
+    position: relative;
+    font-size: 1rem;
+    color: var(--mist);
+    border-bottom: 1px solid rgba(61,127,255,0.1);
+  }
+
+  .bc-bullets li:last-child { border-bottom: none; }
+
+  .bc-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--electric-blue);
+  }
+
+  .bc-finale {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--gold);
+    margin: 30px 0;
+    letter-spacing: 0.08em;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 0 20px rgba(245,200,66,0.4);
+  }
+
+  .author-bio {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(61,127,255,0.2);
+    position: relative;
+    z-index: 1;
+  }
+
+  .author-bio h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--electric-blue);
+    margin-bottom: 16px;
+  }
+
+  .author-bio p {
+    font-size: 0.95rem;
+    color: rgba(200,216,240,0.7);
+    line-height: 1.8;
+  }
+
+  .author-bio strong {
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+  }
+
+  .author-bio em {
+    color: var(--lightning);
+  }
+
+  .bc-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(61,127,255,0.15);
+    position: relative;
+    z-index: 1;
+  }
+
+  .bc-footer a {
+    color: var(--lightning);
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+
+  .bc-footer a:hover { opacity: 1; }
+
+  .bc-price {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.2rem;
+    color: var(--gold);
+  }
+
+  /* ===================== LIGHTNING SEPARATOR ===================== */
+  .lightning-sep {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 48px 0;
+  }
+
+  .lightning-sep::before,
+  .lightning-sep::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(61,127,255,0.5));
+  }
+
+  .lightning-sep::after {
+    background: linear-gradient(90deg, rgba(61,127,255,0.5), transparent);
+  }
+
+  .lightning-sep span {
+    font-size: 1.2rem;
+    color: var(--electric-blue);
+    text-shadow: 0 0 10px var(--electric-blue);
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .portal-ring { width: 280px; height: 280px; }
+    .summary-box { padding: 24px 20px; }
+    .back-cover { padding: 40px 24px; }
+    .rules-block { padding: 20px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER ==================== -->
+<section class="cover">
+  <div class="portal-ring"></div>
+  <h1 class="cover-title">
+    <span class="the-boy">The Boy Who Could</span>
+    <span class="could-step">Step Through</span>
+    <span class="shadows">Shadows</span>
+  </h1>
+  <p class="cover-subtitle">A Teleportation Adventure</p>
+  <p class="cover-author">Vishresh Gupta</p>
+  <div class="scroll-hint"><span>Begin</span></div>
+</section>
+
+<!-- ==================== BOOK CONTENT ==================== -->
+<main class="book-container">
+
+  <!-- ====== PROLOGUE: THE FIRST JUMP ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Prologue</div>
+    <h2 class="chapter-title">The First Jump</h2>
+
+    <p>The rain fell heavily on the quiet town of Devgarh. Thunder rolled across the sky like a warning.</p>
+
+    <p>Inside a small house near the old railway tracks, a twelve-year-old boy named Arjun sat on the floor doing his homework. The electricity flickered again.</p>
+
+    <p class="dramatic">"Not again," Arjun muttered.</p>
+
+    <p>Suddenly a loud crack of thunder shook the house. The lights went out completely.</p>
+
+    <p class="dramatic">"Mom?" Arjun called.</p>
+    <p class="whisper">No answer.</p>
+
+    <p>He stood up and walked toward the kitchen. The darkness felt strange… thicker than usual. The shadows on the walls looked almost alive.</p>
+
+    <p>Then something strange happened.</p>
+
+    <p>Arjun felt a sudden pull in his chest, like the world around him was stretching.</p>
+
+    <p class="revelation">The next second — the kitchen disappeared.</p>
+
+    <p>And Arjun was suddenly standing outside the house in the rain. He froze. His heart began racing.</p>
+
+    <p class="dramatic">"How… how did I get here?" he whispered.</p>
+
+    <p>The door of the house was still locked from inside. But he was outside.</p>
+
+    <p>That was the moment Arjun realized something impossible.</p>
+
+    <span class="punch-line">He could teleport.</span>
+  </article>
+
+  <div class="lightning-sep"><span>⚡</span></div>
+
+  <!-- ====== CHAPTER 1 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 1</div>
+    <h2 class="chapter-title">The Secret Power</h2>
+
+    <p>The next morning, Arjun tried to convince himself it was a dream. But curiosity kept bothering him.</p>
+
+    <p>He stood in his bedroom and looked at the window.</p>
+
+    <p class="dramatic">"Okay… if I really teleported," he said quietly, "then maybe I can do it again."</p>
+
+    <p>He closed his eyes and imagined himself standing near the mango tree in the backyard. For a moment, nothing happened.</p>
+
+    <p>Then suddenly — the same strange pulling feeling returned. The room twisted around him like water.</p>
+
+    <p class="revelation">In the blink of an eye… Arjun was standing under the mango tree.</p>
+
+    <p>His eyes widened in shock. "It's real…"</p>
+
+    <p>He tried again. This time he imagined the school gate.</p>
+
+    <span class="punch-line">WHOOSH.</span>
+
+    <p>He appeared there instantly. Arjun began laughing with excitement. "This is amazing!"</p>
+
+    <p>But he didn't know something important. Every time he teleported… Someone else could feel it.</p>
+
+    <p>Far away in a secret laboratory, a computer screen suddenly flashed. A scientist looked at the strange energy signal.</p>
+
+    <p class="dramatic">"That's impossible," he said slowly. "Someone just activated a teleportation energy signature."</p>
+
+    <p>He leaned closer to the screen.</p>
+
+    <p class="revelation">"Find that boy."</p>
+  </article>
+
+  <div class="lightning-sep"><span>⚡</span></div>
+
+  <!-- ====== CHAPTER 2 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 2</div>
+    <h2 class="chapter-title">The Problem with Power</h2>
+
+    <p>At first, Arjun used his power for fun. He would teleport to school when he was late. He would teleport to the bakery to get fresh samosas. He even teleported to the rooftop to watch sunsets.</p>
+
+    <p>But teleportation had a strange side effect. Each jump made him feel more tired. Sometimes he would get sudden headaches.</p>
+
+    <p>And sometimes… he would see flashes of strange places he had never visited before.</p>
+
+    <p class="whisper">Cities. Mountains. Dark rooms.</p>
+
+    <p>It was like the power was trying to take him somewhere else. Somewhere important.</p>
+
+    <p>But Arjun had no idea that people were already looking for him. Dangerous people. People who wanted to use his power.</p>
+  </article>
+
+  <div class="lightning-sep"><span>⚡</span></div>
+
+  <!-- ====== CHAPTER 3 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 3</div>
+    <h2 class="chapter-title">The Hunters</h2>
+
+    <p>One evening, Arjun returned home after school. Something felt wrong.</p>
+
+    <p>The house door was open. His mother's phone was lying on the floor. And inside the house were three strangers in black suits.</p>
+
+    <p>One of them looked at Arjun and smiled.</p>
+
+    <p class="dramatic">"Well," the man said calmly. "We finally found you."</p>
+
+    <p>Arjun felt the strange teleportation energy rising inside him again. His heart pounded.</p>
+
+    <p>The man stepped closer.</p>
+
+    <p class="dramatic">"You have a very special ability, Arjun," he said. "And now… it belongs to us."</p>
+
+    <p>Arjun closed his eyes. The power inside him exploded.</p>
+
+    <p class="revelation">And in the next second — he vanished.</p>
+  </article>
+
+  <!-- ====== SUMMARY BOX ====== -->
+  <div class="summary-box">
+    <h3>The Beginning of the Adventure</h3>
+    <p class="section-title">Arjun soon realizes:</p>
+    <ul>
+      <li>His teleportation power is rare and powerful</li>
+      <li>A secret organization wants to capture him</li>
+      <li>His ability may be connected to an ancient energy hidden on Earth</li>
+    </ul>
+    <p class="section-title" style="margin-top:24px">Now he must learn:</p>
+    <ul>
+      <li>How to control his power</li>
+      <li>Who gave him this ability</li>
+      <li>And why he is the only person in the world who can do it</li>
+    </ul>
+    <p style="margin-top:28px; text-align:center; font-style:italic; color:var(--lightning);">Because somewhere out there… there are doors between worlds. And Arjun is the only one who can open them.</p>
+  </div>
+
+  <div class="lightning-sep"><span>⚡</span></div>
+
+  <!-- ====== CHAPTER 4 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 4</div>
+    <h2 class="chapter-title">The Escape</h2>
+
+    <p>The world twisted around Arjun as the teleportation energy burst through his body. In one blink he disappeared from his house. When he opened his eyes again, he was standing on the edge of a quiet hill outside the town. The cold wind brushed against his face.</p>
+
+    <p>Arjun fell to his knees, breathing heavily.</p>
+
+    <p class="dramatic">"Why are they after me?" he whispered.</p>
+
+    <p>Suddenly he heard a distant sound. Helicopters. Arjun looked up in fear. Bright lights were searching the ground below.</p>
+
+    <p class="dramatic">"They found me already?" he said.</p>
+
+    <p>His heart began pounding again. He had to move. But this time he needed to be careful. Every jump made the strange energy inside him stronger… and more painful.</p>
+
+    <p>Arjun closed his eyes and focused. Instead of jumping far away, he imagined a small place nearby — a small abandoned temple he had once seen while hiking.</p>
+
+    <p>The energy gathered again. And in the next moment — he vanished.</p>
+  </article>
+
+  <div class="lightning-sep"><span>⚡</span></div>
+
+  <!-- ====== CHAPTER 5 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 5</div>
+    <h2 class="chapter-title">The Old Temple</h2>
+
+    <p>The ancient temple stood deep inside a forest. Broken pillars and cracked stone walls showed its age. Arjun appeared inside the dark temple hall. Dust floated through the air.</p>
+
+    <p>At first it felt safe. But then something strange happened.</p>
+
+    <p>The moment Arjun stepped near the center of the temple floor, the stone beneath him began to glow faintly. Symbols appeared on the ground. Ancient symbols.</p>
+
+    <p>Arjun stepped back in shock.</p>
+
+    <p class="dramatic">"What is this place?" he whispered.</p>
+
+    <p>Suddenly a deep voice echoed through the hall.</p>
+
+    <p class="revelation">"You have finally come."</p>
+
+    <p>Arjun turned quickly. An old man wearing simple robes stood near the temple entrance. His eyes were calm but powerful.</p>
+
+    <p class="dramatic">"You… know about my power?" Arjun asked nervously.</p>
+
+    <p>The old man nodded slowly.</p>
+
+    <p class="dramatic">"You are not the first one to possess this ability."</p>
+
+    <p>Arjun's eyes widened. "But you may be the last."</p>
+  </article>
+
+  <div class="lightning-sep"><span>⚡</span></div>
+
+  <!-- ====== CHAPTER 6 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 6</div>
+    <h2 class="chapter-title">The Truth</h2>
+
+    <p>The old man introduced himself as Master Devayan. He had been guarding the temple for many years.</p>
+
+    <p class="dramatic">"This temple is connected to the energy you use," Devayan explained. "Teleportation is not just a power. It is a gateway ability."</p>
+
+    <p class="dramatic">"A gateway to what?" Arjun asked.</p>
+
+    <p>Devayan pointed to the glowing symbols.</p>
+
+    <p class="dramatic">"These symbols connect different places… even different worlds."</p>
+
+    <p>Arjun's heart skipped a beat.</p>
+
+    <p class="dramatic">"Different worlds?"</p>
+
+    <p>Devayan nodded. "Long ago, people who had your power protected these gateways. But an organization discovered this energy and tried to control it."</p>
+
+    <p>Arjun immediately remembered the men in black suits. "They are the ones chasing me," he said.</p>
+
+    <p class="dramatic">"Yes," Devayan replied. "They want your power so they can open the gateways themselves."</p>
+
+    <p>Arjun looked down at his hands. "So I'm the only one who can stop them?"</p>
+
+    <p>Devayan gave a small smile. "You must first learn to control your power."</p>
+  </article>
+
+  <div class="lightning-sep"><span>⚡</span></div>
+
+  <!-- ====== CHAPTER 7 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 7</div>
+    <h2 class="chapter-title">Training</h2>
+
+    <p>The training was harder than Arjun expected. Teleportation was not just about imagining places.</p>
+
+    <p>Devayan taught him three important rules:</p>
+
+    <div class="rules-block">
+      <h4>The Three Laws of Teleportation</h4>
+      <ol>
+        <li>Control your breathing</li>
+        <li>Focus on the exact location</li>
+        <li>Never teleport when your mind is full of fear</li>
+      </ol>
+    </div>
+
+    <p>At first Arjun failed many times. Sometimes he appeared a few meters away from where he wanted. Sometimes he couldn't teleport at all.</p>
+
+    <p>But slowly he improved. After several days, Arjun could teleport smoothly and without pain.</p>
+
+    <p>One evening Devayan looked serious. "You are improving fast," he said. "But the hunters are coming."</p>
+
+    <p class="dramatic">"How do you know?" Arjun asked.</p>
+
+    <p>Devayan pointed toward the sky. In the distance, dark helicopters were flying toward the forest.</p>
+  </article>
+
+  <div class="lightning-sep"><span>⚡</span></div>
+
+  <!-- ====== CHAPTER 8 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 8</div>
+    <h2 class="chapter-title">The Attack</h2>
+
+    <p>The night exploded with noise. Searchlights cut through the forest. Soldiers surrounded the temple.</p>
+
+    <p>The leader of the men in black stepped forward.</p>
+
+    <p class="dramatic">"You cannot hide forever, Arjun," he shouted.</p>
+
+    <p>Devayan whispered to Arjun. "This is the moment you must choose."</p>
+
+    <p class="dramatic">"Choose what?" Arjun asked.</p>
+
+    <p class="dramatic">"To run… or to protect the gateway."</p>
+
+    <p>Arjun looked at the glowing temple floor. If the organization captured him, they could open the gateways. Maybe even destroy the world.</p>
+
+    <p>Arjun clenched his fists.</p>
+
+    <p class="revelation">"I won't run."</p>
+
+    <p>He closed his eyes. Energy surrounded him like lightning.</p>
+
+    <p>And suddenly — Arjun teleported inside the enemy helicopter. The soldiers stared in shock. Before anyone could react… Arjun teleported again. And again. And again.</p>
+
+    <span class="punch-line">Chaos erupted.</span>
+    <span class="punch-line" style="font-size:0.9rem; color:var(--electric-blue);">The attack had begun.</span>
+  </article>
+
+  <div class="lightning-sep"><span>⚡</span></div>
+
+  <!-- ====== CHAPTER 9 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 9</div>
+    <h2 class="chapter-title">The Hidden Door</h2>
+
+    <p>After the battle, the temple floor began glowing brighter than before. The ancient symbols moved like living light.</p>
+
+    <p>Devayan looked surprised. "It's opening…" he whispered.</p>
+
+    <p class="dramatic">"What's opening?" Arjun asked.</p>
+
+    <p>Devayan pointed at the center of the temple. A circular portal slowly appeared. Beyond it… was a strange world filled with floating mountains and glowing rivers.</p>
+
+    <p class="dramatic">"This is one of the ancient gateways," Devayan said.</p>
+
+    <p>Arjun stared at the portal. His power was reacting to it. Stronger than ever before.</p>
+
+    <p class="dramatic">"You are connected to it," Devayan said. "And this is only the beginning."</p>
+
+    <p>Arjun took a deep breath. His adventure had just become much bigger.</p>
+
+    <p>Because somewhere in that other world… something was waiting for him.</p>
+  </article>
+
+  <!-- ==================== BACK COVER ==================== -->
+  <div class="back-cover">
+    <h2 class="bc-headline">The Power to Go Anywhere…<br>The Danger to Lose Everything</h2>
+
+    <p class="bc-body">Arjun was just an ordinary boy living a normal life. Until the night he discovered something impossible. <strong style="color:var(--gold); font-family:'Cinzel',serif;">He could teleport.</strong></p>
+
+    <p class="bc-body">With a single thought, Arjun can step through space and appear anywhere in the world. What first feels like an incredible gift soon becomes a dangerous secret.</p>
+
+    <ul class="bc-bullets">
+      <li>A powerful organization is hunting him</li>
+      <li>An ancient temple reveals a hidden truth</li>
+      <li>Mysterious gateways between worlds are beginning to open</li>
+    </ul>
+
+    <p class="bc-callout">Now he must make a choice:</p>
+
+    <ul class="bc-bullets">
+      <li>Run from those who want to capture him…</li>
+      <li>or stand and protect a power that could change the fate of the world</li>
+    </ul>
+
+    <p class="bc-finale">Because once the gateways open…<br>Nothing will ever be the same again.</p>
+
+    <div class="author-bio">
+      <h4>About the Author</h4>
+      <p><strong>Vishresh Gupta</strong> is a storyteller who loves creating imaginative worlds filled with adventure, mystery, action, and powerful characters. <em>The Boy Who Could Step Through Shadows</em> is an exciting journey about courage, discovery, and the responsibility that comes with extraordinary abilities.</p>
+    </div>
+
+    <div class="bc-footer">
+      <a href="http://www.authorvishresh.com" target="_blank">www.authorvishresh.com</a>
+      <span class="bc-price">₹50</span>
+    </div>
+  </div>
+
+</main>
+
+</body>
+</html>
