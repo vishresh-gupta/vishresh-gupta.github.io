@@ -1,1 +1,998 @@
-<h1>Vishresh Gupta</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vishresh Gupta — E-Book Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:         #f7f3ec;
+  --bg2:        #ede7db;
+  --bg3:        #e0d8ca;
+  --ink:        #1a1612;
+  --ink2:       #3d3328;
+  --ink3:       #6b5c48;
+  --accent:     #c0392b;
+  --accent2:    #e8563a;
+  --gold:       #b8860b;
+  --light-rule: rgba(26,22,18,0.12);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--light-rule);
+  padding: 0 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 68px;
+}
+
+.nav-brand {
+  display: flex; align-items: baseline; gap: 10px;
+  text-decoration: none;
+}
+
+.nav-brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--ink);
+}
+
+.nav-brand-tag {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border-left: 1px solid var(--light-rule);
+  padding-left: 10px;
+}
+
+.nav-links {
+  display: flex; gap: 36px; list-style: none; align-items: center;
+}
+
+.nav-links a {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+.nav-cta {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--accent);
+  padding: 10px 22px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--accent2); }
+
+/* ─── HERO ─── */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 460px;
+  min-height: calc(100vh - 68px);
+  overflow: hidden;
+}
+
+.hero-left {
+  padding: 80px 64px 80px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+  border-right: 1px solid var(--light-rule);
+  position: relative;
+}
+
+.hero-kicker {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+  animation: slideUp 0.7s ease both;
+}
+.hero-kicker::before { content: ''; width: 32px; height: 1px; background: var(--accent); }
+
+.hero-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 5.5vw, 5rem);
+  font-weight: 900;
+  line-height: 1.0;
+  color: var(--ink);
+  margin-bottom: 28px;
+  animation: slideUp 0.8s ease 0.1s both;
+}
+.hero-headline em { font-style: italic; color: var(--accent); }
+
+.hero-sub {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--ink3);
+  line-height: 1.7;
+  max-width: 420px;
+  margin-bottom: 48px;
+  animation: slideUp 0.9s ease 0.2s both;
+}
+
+.hero-stats {
+  display: flex; gap: 40px;
+  margin-bottom: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--light-rule);
+  animation: slideUp 1s ease 0.3s both;
+}
+
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+  display: block;
+}
+
+.stat-label {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  display: block;
+  margin-top: 4px;
+}
+
+.hero-btns {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  animation: slideUp 1.1s ease 0.4s both;
+}
+
+.btn-red {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 15px 34px;
+  background: var(--accent);
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 4px 4px 0 rgba(192,57,43,0.25);
+}
+.btn-red:hover { background: var(--accent2); transform: translate(-2px,-2px); box-shadow: 6px 6px 0 rgba(192,57,43,0.25); }
+
+.btn-ink {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 30px;
+  background: transparent;
+  color: var(--ink);
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1.5px solid var(--ink2);
+  transition: background 0.2s, color 0.2s;
+}
+.btn-ink:hover { background: var(--ink); color: var(--bg); }
+
+/* ─── HERO RIGHT — dark panel ─── */
+.hero-right {
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 60px 48px;
+}
+
+/* grid bg */
+.hero-right::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(247,243,236,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247,243,236,0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* glow */
+.hero-right::after {
+  content: '';
+  position: absolute;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(192,57,43,0.18) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%,-50%) scale(1.1); }
+}
+
+.hero-book {
+  position: relative; z-index: 2;
+  width: 240px;
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-18px) rotate(2deg); }
+}
+
+.hb-cover {
+  width: 100%;
+  aspect-ratio: 2/3;
+  background: linear-gradient(160deg, #1a2040 0%, #0d1020 55%, #1e0d28 100%);
+  border: 1px solid rgba(247,243,236,0.1);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 24px 18px;
+  text-align: center;
+  position: relative; overflow: hidden;
+  box-shadow: -16px 20px 50px rgba(0,0,0,0.75), 0 0 0 1px rgba(247,243,236,0.05);
+}
+
+/* spine */
+.hb-cover::before {
+  content: '';
+  position: absolute; top: 0; bottom: 0; left: 0;
+  width: 5px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));
+}
+
+/* portal ring */
+.hb-cover::after {
+  content: '';
+  position: absolute;
+  width: 150px; height: 150px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(126,192,255,0.35);
+  box-shadow: 0 0 22px rgba(74,143,255,0.2);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  animation: ring-spin 8s linear infinite;
+}
+
+@keyframes ring-spin {
+  from { transform: translate(-50%,-50%) rotate(0deg); }
+  to   { transform: translate(-50%,-50%) rotate(360deg); }
+}
+
+.hb-label {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.45rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(200,220,255,0.65);
+  display: block; margin-bottom: 6px;
+  position: relative; z-index: 1;
+}
+
+.hb-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #eef3fc;
+  line-height: 1.1;
+  text-shadow: 0 0 20px rgba(255,255,255,0.15);
+  margin-bottom: 14px;
+  position: relative; z-index: 1;
+}
+
+.hb-sub {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.48rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(240,192,64,0.85);
+  display: block; margin-bottom: 5px;
+  position: relative; z-index: 1;
+}
+
+.hb-author {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: rgba(240,192,64,0.9);
+  position: relative; z-index: 1;
+}
+
+.hb-meta {
+  margin-top: 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 14px;
+  background: rgba(247,243,236,0.05);
+  border: 1px solid rgba(247,243,236,0.08);
+}
+
+.hb-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #f7f3ec;
+}
+
+.hb-open {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  text-decoration: none;
+  transition: letter-spacing 0.2s;
+}
+.hb-open:hover { letter-spacing: 0.3em; }
+
+/* ─── MARQUEE ─── */
+.marquee-strip {
+  background: var(--accent);
+  padding: 13px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee-inner {
+  display: inline-flex;
+  animation: marquee 25s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-item {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 0 36px;
+}
+.marquee-dot { color: rgba(255,255,255,0.4); padding: 0 4px; }
+
+/* ─── STORE SECTION ─── */
+.store-section { padding: 100px 80px; }
+
+.section-header { margin-bottom: 56px; }
+
+.eyebrow {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 12px;
+}
+.eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--accent); }
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 900;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+/* Book listing card */
+.book-card {
+  display: flex;
+  border: 1px solid var(--light-rule);
+  max-width: 700px;
+  transition: box-shadow 0.25s, transform 0.25s;
+  position: relative;
+}
+.book-card:hover { box-shadow: 8px 8px 0 var(--bg3); transform: translate(-3px,-3px); }
+
+.book-card-thumb {
+  width: 130px;
+  flex-shrink: 0;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px 12px;
+  position: relative;
+  overflow: hidden;
+}
+.book-card-thumb::after {
+  content: '';
+  position: absolute;
+  width: 90px; height: 90px;
+  border-radius: 50%;
+  border: 1px solid rgba(126,192,255,0.2);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  animation: ring-spin 10s linear infinite;
+}
+
+.thumb-inner { text-align: center; position: relative; z-index: 1; }
+.thumb-inner .t-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.75rem;
+  font-weight: 900;
+  color: #eef3fc;
+  line-height: 1.2;
+  display: block; margin-bottom: 8px;
+}
+.thumb-inner .t-author {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.44rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(240,192,64,0.8);
+}
+
+.book-card-body {
+  flex: 1; padding: 28px 26px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+
+.bc-genre {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.bc-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.bc-desc {
+  font-size: 0.95rem;
+  color: var(--ink3);
+  line-height: 1.7;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.bc-footer-row {
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid var(--light-rule);
+  padding-top: 16px;
+  flex-wrap: wrap; gap: 10px;
+}
+
+.bc-price { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--ink); }
+
+.bc-format-tag {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  padding: 4px 10px;
+  border: 1px solid var(--light-rule);
+}
+
+.bc-read-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--accent);
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: background 0.2s, gap 0.2s;
+}
+.bc-read-btn:hover { background: var(--accent2); gap: 10px; }
+
+/* ─── SPOTLIGHT ─── */
+.spotlight {
+  background: var(--ink);
+  padding: 100px 80px;
+}
+
+.spotlight-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.spotlight-cover {
+  width: 100%;
+  aspect-ratio: 2/3;
+  background: linear-gradient(160deg, #1a2040 0%, #0d1020 55%, #1e0d28 100%);
+  border: 1px solid rgba(247,243,236,0.1);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 28px 22px;
+  text-align: center;
+  position: relative; overflow: hidden;
+  box-shadow: -18px 22px 55px rgba(0,0,0,0.75);
+}
+.spotlight-cover::before {
+  content: ''; position: absolute; top:0; bottom:0; left:0;
+  width: 5px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));
+}
+.spotlight-cover::after {
+  content: '';
+  position: absolute;
+  width: 190px; height: 190px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(126,192,255,0.3);
+  box-shadow: 0 0 24px rgba(74,143,255,0.18);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  animation: ring-spin 10s linear infinite;
+}
+
+.sc-label { font-family:'Raleway',sans-serif; font-size:0.46rem; letter-spacing:0.35em; text-transform:uppercase; color:rgba(200,220,255,0.6); display:block; margin-bottom:6px; position:relative; z-index:1; }
+.sc-title { font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:900; color:#eef3fc; line-height:1.1; text-shadow:0 0 22px rgba(255,255,255,0.12); margin-bottom:14px; position:relative; z-index:1; }
+.sc-sub { font-family:'Raleway',sans-serif; font-size:0.5rem; letter-spacing:0.3em; text-transform:uppercase; color:rgba(240,192,64,0.85); display:block; margin-bottom:5px; position:relative; z-index:1; }
+.sc-author { font-family:'Playfair Display',serif; font-size:0.9rem; font-weight:700; color:rgba(240,192,64,0.9); position:relative; z-index:1; }
+
+.spotlight-content .sp-kicker {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 20px;
+}
+.spotlight-content .sp-kicker::before { content: ''; width: 26px; height: 1px; background: var(--accent2); }
+
+.spotlight-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+  font-weight: 900;
+  font-style: italic;
+  color: #f7f3ec;
+  line-height: 1.1;
+  margin-bottom: 22px;
+}
+
+.spotlight-content .sp-desc {
+  font-size: 1.05rem;
+  color: rgba(247,243,236,0.6);
+  line-height: 1.85;
+  font-style: italic;
+  margin-bottom: 30px;
+}
+
+.sp-tags {
+  display: flex; gap: 9px; flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+.sp-tag {
+  padding: 6px 14px;
+  border: 1px solid rgba(247,243,236,0.14);
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(247,243,236,0.45);
+}
+
+.sp-cta {
+  display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
+}
+
+.sp-price { font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:#f7f3ec; }
+
+.btn-red-light {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 14px 34px;
+  background: var(--accent);
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 4px 4px 0 rgba(192,57,43,0.4);
+}
+.btn-red-light:hover { background: var(--accent2); transform: translate(-2px,-2px); box-shadow: 6px 6px 0 rgba(192,57,43,0.35); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px;
+  background: transparent;
+  color: rgba(247,243,236,0.55);
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(247,243,236,0.2);
+  transition: color 0.2s, border-color 0.2s;
+}
+.btn-ghost:hover { color: #f7f3ec; border-color: rgba(247,243,236,0.5); }
+
+/* ─── QUOTE ─── */
+.quote-strip {
+  background: var(--bg2);
+  padding: 80px;
+  text-align: center;
+  border-top: 1px solid var(--light-rule);
+  border-bottom: 1px solid var(--light-rule);
+}
+.big-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.4rem, 2.8vw, 2rem);
+  font-style: italic;
+  font-weight: 700;
+  color: var(--ink);
+  max-width: 680px;
+  margin: 0 auto 16px;
+  line-height: 1.45;
+}
+.big-quote span { color: var(--accent); }
+.quote-src {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--ink3);
+}
+
+/* ─── ABOUT ─── */
+.about-section {
+  padding: 100px 80px;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 80px;
+  align-items: center;
+  border-top: 1px solid var(--light-rule);
+}
+
+.about-text .eyebrow { margin-bottom: 14px; }
+.about-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  font-weight: 900;
+  color: var(--ink);
+  margin-bottom: 22px;
+  line-height: 1.1;
+}
+.about-text p {
+  font-size: 1.05rem;
+  color: var(--ink3);
+  font-style: italic;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.about-text p strong { color: var(--ink); font-style: normal; font-family: 'Raleway', sans-serif; font-weight: 600; font-size: 0.92em; }
+
+.author-card {
+  background: var(--ink);
+  padding: 48px 38px;
+  text-align: center;
+  position: relative;
+}
+.author-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--accent);
+}
+.ac-initial {
+  width: 76px; height: 76px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #fff;
+  margin: 0 auto 20px;
+  box-shadow: 0 6px 24px rgba(192,57,43,0.4);
+}
+.ac-name { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:900; color:#f7f3ec; margin-bottom:5px; }
+.ac-role { font-family:'Raleway',sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.4em; text-transform:uppercase; color:var(--accent2); display:block; margin-bottom:18px; }
+.ac-bio { font-size:0.9rem; color:rgba(247,243,236,0.5); font-style:italic; line-height:1.75; margin-bottom:22px; }
+.ac-link {
+  font-family:'Raleway',sans-serif; font-size:0.62rem; font-weight:700;
+  letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--accent2); text-decoration:none;
+  border-bottom:1px solid rgba(232,86,58,0.35); padding-bottom:3px;
+  transition:color 0.2s, border-color 0.2s;
+}
+.ac-link:hover { color:#fff; border-color:#fff; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--ink);
+  padding: 52px 80px 36px;
+  border-top: 3px solid var(--accent);
+}
+.footer-top {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(247,243,236,0.07);
+}
+.footer-brand-name { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:900; color:#f7f3ec; display:block; margin-bottom:6px; }
+.footer-tagline { font-family:'Cormorant Garamond',serif; font-size:0.95rem; font-style:italic; color:rgba(247,243,236,0.35); }
+.footer-nav-links { display:flex; gap:26px; flex-wrap:wrap; align-items:center; }
+.footer-nav-links a {
+  font-family:'Raleway',sans-serif; font-size:0.66rem; font-weight:500;
+  letter-spacing:0.2em; text-transform:uppercase;
+  color:rgba(247,243,236,0.4); text-decoration:none; transition:color 0.2s;
+}
+.footer-nav-links a:hover { color:#f7f3ec; }
+.footer-bottom {
+  display:flex; justify-content:space-between; align-items:center;
+}
+.footer-copy { font-family:'Raleway',sans-serif; font-size:0.6rem; letter-spacing:0.15em; color:rgba(247,243,236,0.22); text-transform:uppercase; }
+.footer-site { font-family:'Raleway',sans-serif; font-size:0.6rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent2); text-decoration:none; transition:color 0.2s; }
+.footer-site:hover { color:#fff; }
+
+/* ─── ANIMATIONS ─── */
+@keyframes slideUp {
+  from { opacity:0; transform:translateY(26px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.d1 { transition-delay:0.1s; }
+.d2 { transition-delay:0.2s; }
+.d3 { transition-delay:0.3s; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 960px) {
+  nav { padding: 0 22px; }
+  .nav-links { display:none; }
+  .hero { grid-template-columns:1fr; }
+  .hero-left { padding:80px 26px 40px; }
+  .hero-right { height:72vw; min-height:300px; }
+  .store-section { padding:70px 26px; }
+  .spotlight { padding:70px 26px; }
+  .spotlight-grid { grid-template-columns:1fr; gap:40px; }
+  .quote-strip { padding:60px 26px; }
+  .about-section { grid-template-columns:1fr; padding:70px 26px; }
+  footer { padding:48px 26px 32px; }
+  .footer-top { flex-direction:column; gap:24px; }
+  .footer-bottom { flex-direction:column; gap:10px; text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">
+    <span class="nav-brand-name">Vishresh Gupta</span>
+    <span class="nav-brand-tag">E-Book Store</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#store">Books</a></li>
+    <li><a href="#spotlight">Featured</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <a href="#store" class="nav-cta">Browse Books →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-kicker">Official E-Book Store</p>
+    <h1 class="hero-headline">Stories That<br><em>Step Beyond</em><br>the Ordinary.</h1>
+    <p class="hero-sub">Imaginative worlds, impossible adventures, and heroes who discover that ordinary is just the beginning.</p>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">1</span>
+        <span class="stat-label">Book Available</span>
+      </div>
+      <div>
+        <span class="stat-num">₹50</span>
+        <span class="stat-label">Starting Price</span>
+      </div>
+      <div>
+        <span class="stat-num">HTML</span>
+        <span class="stat-label">Read Online</span>
+      </div>
+    </div>
+    <div class="hero-btns">
+      <a href="#store" class="btn-red">Browse Books →</a>
+      <a href="#spotlight" class="btn-ink">Featured Book</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-book">
+      <div class="hb-cover">
+        <span class="hb-label">The Boy Who Could Step Through</span>
+        <div class="hb-title">SHADOWS</div>
+        <span class="hb-sub">A Teleportation Adventure</span>
+        <div class="hb-author">Vishresh Gupta</div>
+      </div>
+      <div class="hb-meta">
+        <span class="hb-price">₹50</span>
+        <a href="the-boy-who-could-step-through-shadows.html" class="hb-open" target="_blank">Read Now →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span class="marquee-item">Teleportation Adventure</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Young Adult Fiction</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Ancient Mysteries</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Other Worlds</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Vishresh Gupta</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">E-Book Store</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Read Online</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Only ₹50</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Teleportation Adventure</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Young Adult Fiction</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Ancient Mysteries</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Other Worlds</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Vishresh Gupta</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">E-Book Store</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Read Online</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Only ₹50</span><span class="marquee-dot">◆</span>
+  </div>
+</div>
+
+<!-- STORE -->
+<section class="store-section" id="store">
+  <div class="section-header">
+    <p class="eyebrow reveal">All Books</p>
+    <h2 class="section-title reveal">The Collection</h2>
+  </div>
+
+  <div class="book-card reveal d1">
+    <div class="book-card-thumb">
+      <div class="thumb-inner">
+        <span class="t-title">SHADOWS</span>
+        <div class="t-author">Vishresh Gupta</div>
+      </div>
+    </div>
+    <div class="book-card-body">
+      <div>
+        <p class="bc-genre">Young Adult · Fantasy · Adventure</p>
+        <h3 class="bc-title">The Boy Who Could Step Through Shadows</h3>
+        <p class="bc-desc">A twelve-year-old discovers he can teleport — and instantly becomes the target of a powerful secret organization. Guided by an ancient temple's guardian, he must master his gift before it's too late.</p>
+      </div>
+      <div class="bc-footer-row">
+        <span class="bc-price">₹50</span>
+        <span class="bc-format-tag">HTML E-Book</span>
+        <a href="the-boy-who-could-step-through-shadows.html" class="bc-read-btn" target="_blank">Open E-Book →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPOTLIGHT -->
+<section class="spotlight" id="spotlight">
+  <div class="spotlight-grid">
+    <div class="spotlight-cover reveal">
+      <span class="sc-label">The Boy Who Could Step Through</span>
+      <div class="sc-title">SHADOWS</div>
+      <span class="sc-sub">A Teleportation Adventure</span>
+      <div class="sc-author">Vishresh Gupta</div>
+    </div>
+
+    <div class="spotlight-content">
+      <p class="sp-kicker reveal">Featured Book</p>
+      <h2 class="reveal">The Boy Who Could Step Through Shadows</h2>
+      <p class="sp-desc reveal">Arjun was an ordinary boy — until one stormy night, the world stretched and he stepped right through it. Now he can teleport anywhere in a blink. But a secret organisation has been watching. They want his power, and they will stop at nothing.<br><br>Guided by Master Devayan, Arjun must master his gift and discover why he alone can open the ancient gateways between worlds.</p>
+      <div class="sp-tags reveal">
+        <span class="sp-tag">⚡ Teleportation</span>
+        <span class="sp-tag">🏛 Ancient Gateways</span>
+        <span class="sp-tag">🌍 Other Worlds</span>
+        <span class="sp-tag">🔥 9 Chapters</span>
+        <span class="sp-tag">👦 Ages 10+</span>
+      </div>
+      <div class="sp-cta reveal">
+        <span class="sp-price">₹50</span>
+        <a href="the-boy-who-could-step-through-shadows.html" class="btn-red-light" target="_blank">Open E-Book →</a>
+        <a href="#about" class="btn-ghost">About Author</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-strip">
+  <p class="big-quote reveal">"Because somewhere out there… there are <span>doors between worlds.</span> And Arjun is the only one who can open them."</p>
+  <p class="quote-src reveal">— The Boy Who Could Step Through Shadows</p>
+</div>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-text">
+    <p class="eyebrow reveal">The Author</p>
+    <h2 class="reveal">Vishresh Gupta</h2>
+    <p class="reveal"><strong>Vishresh Gupta</strong> is a storyteller who loves creating imaginative worlds filled with adventure, mystery, action, and powerful characters.</p>
+    <p class="reveal">His debut novel is a journey about courage, discovery, and the responsibility that comes with extraordinary abilities — written for young readers who dare to imagine the impossible.</p>
+    <p class="reveal">Vishresh believes every child carries a hidden power. His stories exist to remind them of that truth.</p>
+  </div>
+
+  <div class="author-card reveal">
+    <div class="ac-initial">V</div>
+    <div class="ac-name">Vishresh Gupta</div>
+    <span class="ac-role">Author · Storyteller</span>
+    <p class="ac-bio">Creating worlds where young heroes discover they are capable of far more than they ever believed possible.</p>
+    <a href="http://www.authorvishresh.com" class="ac-link" target="_blank">www.authorvishresh.com →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <span class="footer-brand-name">Vishresh Gupta</span>
+      <span class="footer-tagline">Stories that step beyond the ordinary.</span>
+    </div>
+    <nav class="footer-nav-links">
+      <a href="#store">Books</a>
+      <a href="#spotlight">Featured</a>
+      <a href="#about">About</a>
+      <a href="the-boy-who-could-step-through-shadows.html" target="_blank">Read E-Book</a>
+      <a href="http://www.authorvishresh.com" target="_blank">Website</a>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Vishresh Gupta. All rights reserved.</span>
+    <a href="http://www.authorvishresh.com" class="footer-site" target="_blank">authorvishresh.com</a>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  els.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
