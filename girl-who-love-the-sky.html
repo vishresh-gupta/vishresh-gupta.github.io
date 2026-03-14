@@ -793,5 +793,120 @@
 
 </main>
 
+<!-- Donate Button -->
+<button class="donate-btn" onclick="document.getElementById('donateModal').classList.add('active')">
+  Support Author
+</button>
+
+<!-- Donate Modal -->
+<div class="donate-modal" id="donateModal">
+  <div class="donate-modal-content">
+    <span class="donate-close" onclick="document.getElementById('donateModal').classList.remove('active')">&times;</span>
+    <h3 class="donate-title">Support Vishresh Gupta</h3>
+    <p class="donate-subtitle">Your support helps create more amazing stories!</p>
+    <div class="donate-qr">
+      <img src="qr-code.png" alt="Scan to Pay" onerror="this.parentElement.innerHTML='<span style=color:#999;font-size:0.8rem;>QR Code<br>Coming Soon</span>'">
+    </div>
+    <p class="donate-upi">UPI: <strong>9451319679-3@ybl</strong></p>
+  </div>
+</div>
+
+<script>
+  document.getElementById('donateModal').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('active');
+  });
+</script>
+
+<style>
+.donate-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, var(--sky-blue), var(--sunset-orange));
+  color: #fff;
+  border: none;
+  padding: 15px 25px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(74,144,217,0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  z-index: 999;
+  border-radius: 25px;
+}
+.donate-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(74,144,217,0.5);
+}
+.donate-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+.donate-modal.active { display: flex; }
+.donate-modal-content {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.donate-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-soft);
+  transition: color 0.2s;
+}
+.donate-close:hover { color: var(--sky-deep); }
+.donate-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8rem;
+  color: var(--sky-deep);
+  margin-bottom: 10px;
+}
+.donate-subtitle {
+  font-family: 'Lora', serif;
+  font-size: 1rem;
+  color: var(--text-soft);
+  font-style: italic;
+  margin-bottom: 25px;
+}
+.donate-qr {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 20px;
+  border: 3px solid var(--sky-blue);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  overflow: hidden;
+}
+.donate-qr img { max-width: 100%; max-height: 100%; }
+.donate-upi {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  background: var(--sky-light);
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+.donate-upi strong { color: var(--sunset-orange); }
+</style>
+
 </body>
 </html>

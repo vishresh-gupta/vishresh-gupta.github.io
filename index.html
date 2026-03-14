@@ -878,6 +878,107 @@ footer {
 .footer-site { font-family:'Raleway',sans-serif; font-size:0.6rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent2); text-decoration:none; transition:color 0.2s; }
 .footer-site:hover { color:#fff; }
 
+/* ─── DONATE BUTTON & MODAL ─── */
+.donate-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 15px 25px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(192,57,43,0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  z-index: 999;
+}
+.donate-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(192,57,43,0.5);
+}
+
+.donate-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+.donate-modal.active { display: flex; }
+
+.donate-modal-content {
+  background: var(--bg);
+  padding: 40px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.donate-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--ink3);
+  transition: color 0.2s;
+}
+.donate-close:hover { color: var(--accent); }
+
+.donate-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.donate-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: var(--ink3);
+  font-style: italic;
+  margin-bottom: 25px;
+}
+
+.donate-qr {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 20px;
+  border: 2px solid var(--light-rule);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  overflow: hidden;
+}
+
+.donate-qr img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.donate-upi {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.8rem;
+  color: var(--ink2);
+  background: var(--bg2);
+  padding: 10px 20px;
+  border-radius: 4px;
+  margin-top: 15px;
+}
+
+.donate-upi strong { color: var(--accent); }
+
 /* ─── ANIMATIONS ─── */
 @keyframes slideUp {
   from { opacity:0; transform:translateY(26px); }
@@ -1027,7 +1128,7 @@ footer {
     <div class="bc-footer-row">
       <span class="bc-price">₹50</span>
       <span class="bc-format-tag">HTML E-Book</span>
-      <a href="girl-who-love-the-sky.html" class="bc-download-btn" download>Download</a>
+      <a href="pdf/girl-who-love-the-sky.pdf" class="bc-download-btn" download>Download PDF</a>
       <a href="girl-who-love-the-sky.html" class="bc-read-btn" target="_blank">
         Read Now →
       </a>
@@ -1050,7 +1151,7 @@ footer {
       <div class="bc-footer-row">
         <span class="bc-price">₹50</span>
         <span class="bc-format-tag">HTML E-Book</span>
-        <a href="the-boy-who-could-step-through-shadows.html" class="bc-download-btn" download>Download</a>
+        <a href="pdf/the-boy-who-could-step-through-shadows.pdf" class="bc-download-btn" download>Download PDF</a>
         <a href="the-boy-who-could-step-through-shadows.html" class="bc-read-btn" target="_blank">Read Now →</a>
       </div>
     </div>
@@ -1072,7 +1173,7 @@ footer {
       <div class="bc-footer-row">
         <span class="bc-price">₹50</span>
         <span class="bc-format-tag">HTML E-Book</span>
-        <a href="the-horror-village.html" class="bc-download-btn" download>Download</a>
+        <a href="pdf/the-horror-village.pdf" class="bc-download-btn" download>Download PDF</a>
         <a href="the-horror-village.html" class="bc-read-btn" target="_blank">Read Now →</a>
       </div>
     </div>
@@ -1158,12 +1259,35 @@ footer {
   </div>
 </footer>
 
+<!-- Donate Button -->
+<button class="donate-btn" onclick="document.getElementById('donateModal').classList.add('active')">
+  Support Author
+</button>
+
+<!-- Donate Modal -->
+<div class="donate-modal" id="donateModal">
+  <div class="donate-modal-content">
+    <span class="donate-close" onclick="document.getElementById('donateModal').classList.remove('active')">&times;</span>
+    <h3 class="donate-title">Support Vishresh Gupta</h3>
+    <p class="donate-subtitle">Your support helps create more amazing stories!</p>
+    <div class="donate-qr">
+      <img src="qr-code.png" alt="Scan to Pay" onerror="this.parentElement.innerHTML='<span style=color:#999;font-size:0.8rem;>QR Code<br>Coming Soon</span>'">
+    </div>
+    <p class="donate-upi">UPI: <strong>9451319679-3@ybl</strong></p>
+  </div>
+</div>
+
 <script>
   const els = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   els.forEach(el => obs.observe(el));
+
+  // Close modal on outside click
+  document.getElementById('donateModal').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('active');
+  });
 </script>
 </body>
 </html>
