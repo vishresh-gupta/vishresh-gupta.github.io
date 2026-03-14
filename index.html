@@ -410,29 +410,39 @@ nav {
   line-height: 1.1;
 }
 
+/* Books grid container */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}
+
 /* Book listing card */
 .book-card {
   display: flex;
+  flex-direction: column;
   border: 1px solid var(--light-rule);
-  max-width: 700px;
   transition: box-shadow 0.25s, transform 0.25s;
   position: relative;
+  background: var(--bg);
 }
 .book-card:hover { box-shadow: 8px 8px 0 var(--bg3); transform: translate(-3px,-3px); }
 
 .book-card-thumb {
-  width: 130px;
+  width: 100%;
+  height: 180px;
   flex-shrink: 0;
   background: var(--ink);
   display: flex; align-items: center; justify-content: center;
-  padding: 16px 12px;
+  padding: 24px 16px;
   position: relative;
   overflow: hidden;
 }
 .book-card-thumb::after {
   content: '';
   position: absolute;
-  width: 90px; height: 90px;
+  width: 120px; height: 120px;
   border-radius: 50%;
   border: 1px solid rgba(126,192,255,0.2);
   top: 50%; left: 50%;
@@ -443,7 +453,7 @@ nav {
 .thumb-inner { text-align: center; position: relative; z-index: 1; }
 .thumb-inner .t-title {
   font-family: 'Playfair Display', serif;
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 900;
   color: #eef3fc;
   line-height: 1.2;
@@ -451,7 +461,7 @@ nav {
 }
 .thumb-inner .t-author {
   font-family: 'Raleway', sans-serif;
-  font-size: 0.44rem;
+  font-size: 0.55rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: rgba(240,192,64,0.8);
@@ -733,6 +743,14 @@ nav {
   margin: 0 auto 20px;
   box-shadow: 0 6px 24px rgba(192,57,43,0.4);
 }
+.ac-photo {
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 20px;
+  border: 3px solid var(--accent);
+  box-shadow: 0 6px 24px rgba(192,57,43,0.4);
+}
 .ac-name { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:900; color:#f7f3ec; margin-bottom:5px; }
 .ac-role { font-family:'Raleway',sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.4em; text-transform:uppercase; color:var(--accent2); display:block; margin-bottom:18px; }
 .ac-bio { font-size:0.9rem; color:rgba(247,243,236,0.5); font-style:italic; line-height:1.75; margin-bottom:22px; }
@@ -792,6 +810,7 @@ footer {
   .hero-left { padding:80px 26px 40px; }
   .hero-right { height:72vw; min-height:300px; }
   .store-section { padding:70px 26px; }
+  .books-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
   .spotlight { padding:70px 26px; }
   .spotlight-grid { grid-template-columns:1fr; gap:40px; }
   .quote-strip { padding:60px 26px; }
@@ -799,6 +818,11 @@ footer {
   footer { padding:48px 26px 32px; }
   .footer-top { flex-direction:column; gap:24px; }
   .footer-bottom { flex-direction:column; gap:10px; text-align:center; }
+}
+
+@media (max-width: 600px) {
+  .books-grid { grid-template-columns: 1fr; }
+  .book-card-thumb { height: 150px; }
 }
 </style>
 </head>
@@ -826,8 +850,8 @@ footer {
     <p class="hero-sub">Imaginative worlds, impossible adventures, and heroes who discover that ordinary is just the beginning.</p>
     <div class="hero-stats">
       <div>
-        <span class="stat-num">1</span>
-        <span class="stat-label">Book Available</span>
+        <span class="stat-num">3</span>
+        <span class="stat-label">Books Available</span>
       </div>
       <div>
         <span class="stat-num">₹50</span>
@@ -864,21 +888,23 @@ footer {
 <div class="marquee-strip">
   <div class="marquee-inner">
     <span class="marquee-item">Teleportation Adventure</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Horror Stories</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Flying Dreams</span><span class="marquee-dot">◆</span>
     <span class="marquee-item">Young Adult Fiction</span><span class="marquee-dot">◆</span>
     <span class="marquee-item">Ancient Mysteries</span><span class="marquee-dot">◆</span>
-    <span class="marquee-item">Other Worlds</span><span class="marquee-dot">◆</span>
     <span class="marquee-item">Vishresh Gupta</span><span class="marquee-dot">◆</span>
-    <span class="marquee-item">E-Book Store</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">3 E-Books</span><span class="marquee-dot">◆</span>
     <span class="marquee-item">Read Online</span><span class="marquee-dot">◆</span>
-    <span class="marquee-item">Only ₹50</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Only Rs.50</span><span class="marquee-dot">◆</span>
     <span class="marquee-item">Teleportation Adventure</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Horror Stories</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Flying Dreams</span><span class="marquee-dot">◆</span>
     <span class="marquee-item">Young Adult Fiction</span><span class="marquee-dot">◆</span>
     <span class="marquee-item">Ancient Mysteries</span><span class="marquee-dot">◆</span>
-    <span class="marquee-item">Other Worlds</span><span class="marquee-dot">◆</span>
     <span class="marquee-item">Vishresh Gupta</span><span class="marquee-dot">◆</span>
-    <span class="marquee-item">E-Book Store</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">3 E-Books</span><span class="marquee-dot">◆</span>
     <span class="marquee-item">Read Online</span><span class="marquee-dot">◆</span>
-    <span class="marquee-item">Only ₹50</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Only Rs.50</span><span class="marquee-dot">◆</span>
   </div>
 </div>
 
@@ -888,6 +914,7 @@ footer {
     <p class="eyebrow reveal">All Books</p>
     <h2 class="section-title reveal">The Collection</h2>
   </div>
+  <div class="books-grid">
 <div class="book-card reveal d1 visible">
   <div class="book-card-thumb">
     <div class="thumb-inner">
@@ -939,6 +966,28 @@ footer {
       </div>
     </div>
   </div>
+
+  <div class="book-card reveal d2">
+    <div class="book-card-thumb" style="background: linear-gradient(160deg, #1a0a0a 0%, #0d0505 55%, #1e0d0d 100%);">
+      <div class="thumb-inner">
+        <span class="t-title" style="color:#cd5c5c;">HORROR<br>VILLAGE</span>
+        <div class="t-author">Vishresh Gupta</div>
+      </div>
+    </div>
+    <div class="book-card-body">
+      <div>
+        <p class="bc-genre">Horror · Mystery · Thriller</p>
+        <h3 class="bc-title">The Horror Village</h3>
+        <p class="bc-desc">Deep in a dark forest lies Shadowvale, a village cursed by a terrifying legend. When brave young Kabir investigates the eerie midnight footsteps, he discovers a shocking secret that changes everything.</p>
+      </div>
+      <div class="bc-footer-row">
+        <span class="bc-price">Rs.50</span>
+        <span class="bc-format-tag">HTML E-Book</span>
+        <a href="the-horror-village.html" class="bc-read-btn" target="_blank">Open E-Book →</a>
+      </div>
+    </div>
+  </div>
+  </div>
 </section>
 
 <!-- SPOTLIGHT -->
@@ -983,12 +1032,12 @@ footer {
     <p class="eyebrow reveal">The Author</p>
     <h2 class="reveal">Vishresh Gupta</h2>
     <p class="reveal"><strong>Vishresh Gupta</strong> is a storyteller who loves creating imaginative worlds filled with adventure, mystery, action, and powerful characters.</p>
-    <p class="reveal">His debut novel is a journey about courage, discovery, and the responsibility that comes with extraordinary abilities — written for young readers who dare to imagine the impossible.</p>
+    <p class="reveal">His books are journeys about courage, discovery, and the responsibility that comes with extraordinary abilities — written for young readers who dare to imagine the impossible.</p>
     <p class="reveal">Vishresh believes every child carries a hidden power. His stories exist to remind them of that truth.</p>
   </div>
 
   <div class="author-card reveal">
-    <div class="ac-initial">V</div>
+    <img src="vishresh.jpg" alt="Vishresh Gupta" class="ac-photo">
     <div class="ac-name">Vishresh Gupta</div>
     <span class="ac-role">Author · Storyteller</span>
     <p class="ac-bio">Creating worlds where young heroes discover they are capable of far more than they ever believed possible.</p>
@@ -1007,7 +1056,9 @@ footer {
       <a href="#store">Books</a>
       <a href="#spotlight">Featured</a>
       <a href="#about">About</a>
-      <a href="the-boy-who-could-step-through-shadows.html" target="_blank">Read E-Book</a>
+      <a href="the-boy-who-could-step-through-shadows.html" target="_blank">Shadows</a>
+      <a href="the-horror-village.html" target="_blank">Horror Village</a>
+      <a href="girl-who-love-the-sky.html" target="_blank">Sky Girl</a>
       <a href="http://www.authorvishresh.com" target="_blank">Website</a>
     </nav>
   </div>

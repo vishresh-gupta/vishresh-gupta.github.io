@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Horror Village</title>
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-black: #0a0a0a;
+    --dark-gray: #151515;
+    --shadow-gray: #1a1a1a;
+    --blood-red: #8b0000;
+    --crimson: #dc143c;
+    --pale-red: #cd5c5c;
+    --fog-white: #d4d4d4;
+    --ghost-white: #f0f0f0;
+    --mist: #a0a0a0;
+    --eerie-green: #2e4a3a;
+    --text: #c8c8c8;
+    --glow: rgba(139, 0, 0, 0.4);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--deep-black);
+    color: var(--text);
+    font-family: 'Lora', Georgia, serif;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* Fog background effect */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(139,0,0,0.05) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 80%, rgba(46,74,58,0.05) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(20,20,20,0.8) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ===================== COVER ===================== */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 60px 20px;
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(180deg, #0a0a0a 0%, #151515 50%, #0a0a0a 100%);
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(139,0,0,0.1) 0%, transparent 70%);
+    animation: eerie-pulse 5s ease-in-out infinite;
+  }
+
+  @keyframes eerie-pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+  }
+
+  /* Ghost silhouette */
+  .ghost-ring {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    border: 2px solid rgba(139,0,0,0.3);
+    box-shadow:
+      0 0 40px rgba(139,0,0,0.2),
+      0 0 100px rgba(139,0,0,0.1),
+      inset 0 0 40px rgba(0,0,0,0.8);
+    animation: ghost-flicker 3s ease-in-out infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  @keyframes ghost-flicker {
+    0%, 100% { opacity: 0.5; box-shadow: 0 0 40px rgba(139,0,0,0.2); }
+    25% { opacity: 0.8; box-shadow: 0 0 60px rgba(139,0,0,0.4); }
+    50% { opacity: 0.3; box-shadow: 0 0 20px rgba(139,0,0,0.1); }
+    75% { opacity: 0.7; box-shadow: 0 0 50px rgba(139,0,0,0.3); }
+  }
+
+  .cover-title {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 10px;
+    animation: fade-down 1.2s ease both;
+  }
+
+  .cover-title .the-word {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 400;
+    color: var(--mist);
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .cover-title .horror {
+    display: block;
+    font-family: 'Creepster', cursive;
+    font-size: clamp(3.5rem, 12vw, 7rem);
+    color: var(--blood-red);
+    letter-spacing: 0.05em;
+    text-shadow:
+      0 0 20px rgba(139,0,0,0.8),
+      0 0 60px rgba(139,0,0,0.5),
+      0 4px 15px rgba(0,0,0,0.9),
+      2px 2px 0 #4a0000;
+    animation: horror-glow 4s ease-in-out infinite;
+  }
+
+  .cover-title .village {
+    display: block;
+    font-family: 'Creepster', cursive;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    color: var(--fog-white);
+    letter-spacing: 0.08em;
+    text-shadow:
+      0 0 15px rgba(212,212,212,0.5),
+      0 4px 10px rgba(0,0,0,0.8);
+    margin-top: -10px;
+  }
+
+  @keyframes horror-glow {
+    0%, 100% { text-shadow: 0 0 20px rgba(139,0,0,0.8), 0 0 60px rgba(139,0,0,0.5), 0 4px 15px rgba(0,0,0,0.9); }
+    50% { text-shadow: 0 0 40px rgba(220,20,60,1), 0 0 100px rgba(139,0,0,0.8), 0 4px 15px rgba(0,0,0,0.9); }
+  }
+
+  .cover-subtitle {
+    position: relative;
+    z-index: 2;
+    margin-top: 20px;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.65rem, 1.8vw, 0.9rem);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--pale-red);
+    text-shadow: 0 0 15px rgba(205,92,92,0.5);
+    animation: fade-up 1.4s ease 0.3s both;
+  }
+
+  .cover-author {
+    position: relative;
+    z-index: 2;
+    margin-top: 30px;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    color: var(--fog-white);
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-shadow: 0 0 20px rgba(212,212,212,0.4);
+    animation: fade-up 1.6s ease 0.5s both;
+  }
+
+  @keyframes fade-down {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.4;
+    animation: float 2.5s ease-in-out infinite;
+    z-index: 2;
+  }
+
+  .scroll-hint span {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--mist);
+  }
+
+  .scroll-hint::after {
+    content: '...';
+    font-size: 1.5rem;
+    color: var(--blood-red);
+    letter-spacing: 0.3em;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
+    50% { transform: translateX(-50%) translateY(8px); opacity: 0.7; }
+  }
+
+  /* ===================== MAIN LAYOUT ===================== */
+  .book-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===================== CHAPTERS ===================== */
+  .chapter {
+    margin-bottom: 80px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: reveal 0.8s ease forwards;
+  }
+
+  @keyframes reveal {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .chapter-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--blood-red);
+    margin-bottom: 8px;
+    opacity: 0.7;
+  }
+
+  .chapter-title {
+    font-family: 'Creepster', cursive;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    color: var(--fog-white);
+    font-weight: 400;
+    margin-bottom: 30px;
+    line-height: 1.3;
+    text-shadow: 0 0 15px rgba(212,212,212,0.2);
+    position: relative;
+    padding-bottom: 18px;
+  }
+
+  .chapter-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--blood-red), transparent);
+    box-shadow: 0 0 10px var(--blood-red);
+  }
+
+  /* ===================== PARAGRAPH STYLES ===================== */
+  .chapter p {
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 1.4em;
+    line-height: 1.9;
+  }
+
+  .chapter p.dramatic {
+    font-size: 1.1rem;
+    color: var(--fog-white);
+    font-style: italic;
+    border-left: 2px solid var(--blood-red);
+    padding-left: 20px;
+    margin: 28px 0;
+    box-shadow: -4px 0 20px rgba(139,0,0,0.2);
+  }
+
+  .chapter p.eerie {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: var(--pale-red);
+    margin: 32px 0;
+    text-shadow: 0 0 15px rgba(205,92,92,0.4);
+  }
+
+  .chapter p.whisper {
+    font-size: 0.95rem;
+    color: rgba(160,160,160,0.7);
+    font-style: italic;
+    text-align: center;
+  }
+
+  .chapter p.footsteps {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.3em;
+    color: var(--blood-red);
+    margin: 24px 0;
+    text-shadow: 0 0 20px rgba(139,0,0,0.6);
+    animation: footstep-flicker 2s ease-in-out infinite;
+  }
+
+  @keyframes footstep-flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  /* Short punchy lines */
+  .punch-line {
+    display: block;
+    text-align: center;
+    font-family: 'Creepster', cursive;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    color: var(--fog-white);
+    letter-spacing: 0.05em;
+    margin: 20px 0;
+    text-shadow: 0 0 10px rgba(212,212,212,0.3);
+  }
+
+  .punch-line.horror {
+    color: var(--blood-red);
+    text-shadow: 0 0 20px rgba(139,0,0,0.6);
+  }
+
+  /* ===================== DIVIDER ===================== */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 60px 0;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(139,0,0,0.4));
+  }
+
+  .divider::after {
+    background: linear-gradient(90deg, rgba(139,0,0,0.4), transparent);
+  }
+
+  .divider span {
+    font-size: 1.2rem;
+    color: var(--blood-red);
+    text-shadow: 0 0 10px var(--blood-red);
+  }
+
+  /* ===================== BACK COVER ===================== */
+  .back-cover {
+    padding: 60px 40px;
+    background: linear-gradient(135deg, rgba(15,15,15,0.95) 0%, rgba(26,26,26,0.95) 100%);
+    border: 1px solid rgba(139,0,0,0.2);
+    border-radius: 4px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 80px;
+  }
+
+  .back-cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(139,0,0,0.05) 0%, transparent 70%);
+    animation: eerie-pulse 6s ease-in-out infinite;
+  }
+
+  .back-cover .bc-headline {
+    font-family: 'Creepster', cursive;
+    font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+    color: var(--blood-red);
+    line-height: 1.4;
+    margin-bottom: 30px;
+    text-shadow: 0 0 20px rgba(139,0,0,0.5);
+    position: relative;
+    z-index: 1;
+  }
+
+  .back-cover .bc-body {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--text);
+    max-width: 560px;
+    margin: 0 auto 30px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .back-cover .bc-question {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: var(--pale-red);
+    margin: 30px 0;
+    letter-spacing: 0.1em;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 0 15px rgba(205,92,92,0.4);
+  }
+
+  .author-bio {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(139,0,0,0.2);
+    position: relative;
+    z-index: 1;
+  }
+
+  .author-bio h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--blood-red);
+    margin-bottom: 16px;
+  }
+
+  .author-bio p {
+    font-size: 0.95rem;
+    color: rgba(160,160,160,0.7);
+    line-height: 1.8;
+  }
+
+  .author-bio strong {
+    color: var(--fog-white);
+    font-family: 'Cinzel', serif;
+  }
+
+  .bc-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(139,0,0,0.15);
+    position: relative;
+    z-index: 1;
+  }
+
+  .bc-footer a {
+    color: var(--pale-red);
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+
+  .bc-footer a:hover { opacity: 1; }
+
+  .bc-price {
+    font-family: 'Creepster', cursive;
+    font-size: 1.3rem;
+    color: var(--blood-red);
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .ghost-ring { width: 250px; height: 250px; }
+    .back-cover { padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER ==================== -->
+<section class="cover">
+  <div class="ghost-ring"></div>
+  <h1 class="cover-title">
+    <span class="the-word">The</span>
+    <span class="horror">Horror</span>
+    <span class="village">Village</span>
+  </h1>
+  <p class="cover-subtitle">A Cursed Village from Which No One Returns</p>
+  <p class="cover-author">Vishresh Gupta</p>
+  <div class="scroll-hint"><span>Enter if you dare</span></div>
+</section>
+
+<!-- ==================== BOOK CONTENT ==================== -->
+<main class="book-container">
+
+  <!-- ====== CHAPTER 1 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 1</div>
+    <h2 class="chapter-title">The Village of Shadows</h2>
+
+    <p>Deep inside a thick forest stood a quiet village called <strong>Shadowvale</strong>. During the day it looked peaceful. Children played near the well and farmers worked in their fields.</p>
+
+    <p>But when the sun went down, the village became silent.</p>
+
+    <p class="whisper">No one walked outside at night.</p>
+
+    <p class="eerie">Because something terrible lived in the darkness.</p>
+  </article>
+
+  <div class="divider"><span>...</span></div>
+
+  <!-- ====== CHAPTER 2 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 2</div>
+    <h2 class="chapter-title">The Terrifying Legend</h2>
+
+    <p>Long ago, a tired traveler came to the village asking for food and shelter.</p>
+
+    <p>But the villagers feared strangers.</p>
+
+    <p>They shouted at him and chased him away.</p>
+
+    <p>Before disappearing into the forest, the traveler turned around and said in a cold voice:</p>
+
+    <p class="dramatic">"You refused kindness... now your village will know fear forever."</p>
+
+    <p class="eerie">That night, the curse began.</p>
+  </article>
+
+  <div class="divider"><span>...</span></div>
+
+  <!-- ====== CHAPTER 3 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 3</div>
+    <h2 class="chapter-title">The Midnight Footsteps</h2>
+
+    <p>Every night at exactly <strong>12:00</strong>, strange footsteps echoed through the village.</p>
+
+    <p class="footsteps">Tap... Tap... Tap...</p>
+
+    <p>People heard them outside their doors.</p>
+
+    <p>But when they opened the door...</p>
+
+    <span class="punch-line horror">No one was there.</span>
+  </article>
+
+  <div class="divider"><span>...</span></div>
+
+  <!-- ====== CHAPTER 4 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 4</div>
+    <h2 class="chapter-title">The New Family</h2>
+
+    <p>Many years later, a boy named <strong>Kabir</strong> moved to Shadowvale with his parents.</p>
+
+    <p>Kabir was brave and curious.</p>
+
+    <p>When he heard the villagers talking about ghosts and curses, he didn't believe them.</p>
+
+    <p class="dramatic">"Ghosts are not real," Kabir laughed.</p>
+
+    <p>But the villagers looked worried.</p>
+  </article>
+
+  <div class="divider"><span>...</span></div>
+
+  <!-- ====== CHAPTER 5 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 5</div>
+    <h2 class="chapter-title">The Warning</h2>
+
+    <p>An old woman stopped Kabir near the well.</p>
+
+    <p>Her voice trembled.</p>
+
+    <p class="dramatic">"Never go outside after midnight," she warned.</p>
+
+    <p>Kabir only smiled.</p>
+
+    <p>He wanted to know the truth.</p>
+  </article>
+
+  <div class="divider"><span>...</span></div>
+
+  <!-- ====== CHAPTER 6 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 6</div>
+    <h2 class="chapter-title">Midnight</h2>
+
+    <p>That night Kabir stayed awake.</p>
+
+    <p>When the clock struck twelve, he quietly stepped outside.</p>
+
+    <p>The village was covered in thick fog.</p>
+
+    <p>Then he heard it.</p>
+
+    <p class="footsteps">Tap... Tap... Tap...</p>
+
+    <p>Footsteps behind him.</p>
+
+    <p>Kabir slowly turned around.</p>
+
+    <span class="punch-line horror">A tall shadow stood in the darkness.</span>
+  </article>
+
+  <div class="divider"><span>...</span></div>
+
+  <!-- ====== CHAPTER 7 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 7</div>
+    <h2 class="chapter-title">The Shadow Man</h2>
+
+    <p>The figure looked like a man, but his face was hidden.</p>
+
+    <p>Kabir gathered his courage.</p>
+
+    <p class="dramatic">"Who are you?" he asked.</p>
+
+    <p>The shadow spoke in a deep whisper.</p>
+
+    <p class="dramatic">"I am the traveler your village rejected."</p>
+
+    <p class="eerie">"My curse has lived here for many years."</p>
+  </article>
+
+  <div class="divider"><span>...</span></div>
+
+  <!-- ====== CHAPTER 8 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 8</div>
+    <h2 class="chapter-title">The Secret</h2>
+
+    <p>Kabir felt sorry for the shadow.</p>
+
+    <p class="dramatic">"I'm sorry for what the villagers did," Kabir said.</p>
+
+    <p class="dramatic">"You can stay in our house."</p>
+
+    <p>The shadow became silent.</p>
+
+    <p>Then he slowly laughed.</p>
+
+    <span class="punch-line horror">A cold, terrifying laugh.</span>
+  </article>
+
+  <div class="divider"><span>...</span></div>
+
+  <!-- ====== CHAPTER 9 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 9</div>
+    <h2 class="chapter-title">The Real Curse</h2>
+
+    <p>The shadow stepped closer.</p>
+
+    <p class="dramatic">"You still don't understand," it said.</p>
+
+    <p class="dramatic">"I was never the cursed one."</p>
+
+    <p>Kabir felt the ground shake.</p>
+
+    <p>The shadow's voice became darker.</p>
+
+    <p class="eerie">"The curse needed a new soul to survive."</p>
+  </article>
+
+  <div class="divider"><span>...</span></div>
+
+  <!-- ====== CHAPTER 10 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 10</div>
+    <h2 class="chapter-title">The Shocking Ending</h2>
+
+    <p>Suddenly the shadow disappeared.</p>
+
+    <p>The fog lifted.</p>
+
+    <p>The village became quiet again.</p>
+
+    <p>The curse seemed gone.</p>
+
+    <p class="whisper">But the next night...</p>
+
+    <p>The villagers heard footsteps again.</p>
+
+    <p class="footsteps">Tap... Tap... Tap...</p>
+
+    <p>They opened their doors and saw a tall shadow walking through the village.</p>
+
+    <p>This time...</p>
+
+    <p class="eerie">The shadow looked like a boy.</p>
+
+    <p>And its glowing eyes looked exactly like <strong>Kabir's</strong>.</p>
+
+    <span class="punch-line horror">The curse had chosen its new owner.</span>
+
+    <p style="text-align:center; margin-top:40px; font-family:'Creepster',cursive; font-size:1.5rem; color:var(--blood-red);">The End</p>
+  </article>
+
+  <!-- ==================== BACK COVER ==================== -->
+  <div class="back-cover">
+    <h2 class="bc-headline">A Cursed Village...<br>A Terrifying Secret</h2>
+
+    <p class="bc-body">Deep in a dark forest lies a village called <strong style="color:var(--fog-white);">Shadowvale</strong>, cursed by a terrifying legend. A brave boy named Kabir tries to uncover the truth behind the eerie midnight footsteps and discovers a shocking secret that changes everything.</p>
+
+    <p class="bc-body">But in a place where curses are never easily broken, one terrifying question remains:</p>
+
+    <p class="bc-question">Who will be the curse's next owner?</p>
+
+    <div class="author-bio">
+      <h4>About the Author</h4>
+      <p><strong>Vishresh Gupta</strong> is a storyteller who loves creating imaginative worlds filled with adventure, mystery, and thrilling twists. <em>The Horror Village</em> is a spine-chilling tale about bravery, consequences, and the terrifying price of curiosity.</p>
+    </div>
+
+    <div class="bc-footer">
+      <a href="http://www.authorvishresh.com" target="_blank">www.authorvishresh.com</a>
+      <span class="bc-price">Rs.50</span>
+    </div>
+  </div>
+
+</main>
+
+</body>
+</html>

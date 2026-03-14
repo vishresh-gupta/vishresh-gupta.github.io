@@ -3,205 +3,747 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Girl Who Loved the Sky</title>
-
+<title>The Girl Who Could Fly</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
-body{
-    font-family: Georgia, serif;
-    line-height: 1.6;
-    margin: 40px;
-    background:#f9f9f9;
-    color:#333;
-}
+  :root {
+    --sky-light: #e8f4fc;
+    --sky-blue: #87ceeb;
+    --sky-deep: #4a90d9;
+    --sunset-orange: #f5a962;
+    --sunset-pink: #f0a0c0;
+    --cloud-white: #ffffff;
+    --golden-hour: #ffd700;
+    --text-dark: #2c3e50;
+    --text-soft: #5a6c7d;
+    --wing-silver: #c0d6e4;
+  }
 
-h1{
-    text-align:center;
-    font-size:40px;
-    margin-bottom:40px;
-}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-h2{
-    color:#2c3e50;
-    margin-top:40px;
-}
+  body {
+    background: linear-gradient(180deg, var(--sky-light) 0%, #d4e9f7 50%, var(--sky-light) 100%);
+    color: var(--text-dark);
+    font-family: 'Lora', Georgia, serif;
+    line-height: 1.8;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
 
-.chapter{
-    margin-bottom:40px;
-    padding:20px;
-    background:white;
-    border-radius:8px;
-    box-shadow:0 0 8px rgba(0,0,0,0.1);
-}
+  /* Floating clouds background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 15% 20%, rgba(255,255,255,0.8) 0%, transparent 25%),
+      radial-gradient(ellipse at 85% 15%, rgba(255,255,255,0.7) 0%, transparent 20%),
+      radial-gradient(ellipse at 60% 80%, rgba(255,255,255,0.6) 0%, transparent 25%),
+      radial-gradient(ellipse at 25% 70%, rgba(255,255,255,0.5) 0%, transparent 20%),
+      radial-gradient(ellipse at 90% 60%, rgba(255,255,255,0.6) 0%, transparent 18%);
+    pointer-events: none;
+    z-index: 0;
+    animation: clouds-drift 30s ease-in-out infinite;
+  }
 
-.end{
-    text-align:center;
-    font-size:24px;
-    margin-top:50px;
-}
+  @keyframes clouds-drift {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-20px); }
+  }
+
+  /* ===================== COVER ===================== */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 60px 20px;
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(180deg,
+      #1a1a40 0%,
+      #2d3a6d 15%,
+      #4a7ab0 35%,
+      #87ceeb 55%,
+      #f5d6a8 75%,
+      #f5a962 90%,
+      #e88a5a 100%);
+  }
+
+  /* Stars at top */
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background:
+      radial-gradient(1px 1px at 10% 10%, rgba(255,255,255,0.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 5%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 15%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 8%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 12%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(2px 2px at 25% 3%, rgba(255,255,255,0.9) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 18%, rgba(255,255,255,0.7) 0%, transparent 100%);
+    pointer-events: none;
+    animation: twinkle 3s ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  /* Flying wing silhouette */
+  .wing-circle {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.3);
+    box-shadow:
+      0 0 40px rgba(255,255,255,0.2),
+      0 0 80px rgba(135,206,235,0.2),
+      inset 0 0 40px rgba(255,255,255,0.1);
+    animation: float-gentle 4s ease-in-out infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .wing-circle::before {
+    content: '';
+    position: absolute;
+    inset: -15px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    animation: float-gentle 5s ease-in-out infinite reverse;
+  }
+
+  @keyframes float-gentle {
+    0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+    50% { transform: translate(-50%, -50%) translateY(-15px); }
+  }
+
+  .cover-title {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 10px;
+    animation: fade-down 1.2s ease both;
+  }
+
+  .cover-title .the-girl {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+    font-weight: 400;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    margin-bottom: 8px;
+  }
+
+  .cover-title .who-could {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    font-weight: 400;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .cover-title .fly {
+    display: block;
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(4rem, 14vw, 8rem);
+    color: #fff;
+    letter-spacing: 0.02em;
+    text-shadow:
+      0 0 30px rgba(255,255,255,0.8),
+      0 0 60px rgba(135,206,235,0.5),
+      0 4px 20px rgba(0,0,0,0.3);
+    animation: fly-glow 3s ease-in-out infinite;
+  }
+
+  @keyframes fly-glow {
+    0%, 100% { text-shadow: 0 0 30px rgba(255,255,255,0.8), 0 0 60px rgba(135,206,235,0.5), 0 4px 20px rgba(0,0,0,0.3); }
+    50% { text-shadow: 0 0 50px rgba(255,255,255,1), 0 0 100px rgba(135,206,235,0.8), 0 4px 20px rgba(0,0,0,0.3); }
+  }
+
+  .cover-subtitle {
+    position: relative;
+    z-index: 2;
+    margin-top: 20px;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.65rem, 1.8vw, 0.85rem);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--golden-hour);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    animation: fade-up 1.4s ease 0.3s both;
+  }
+
+  .cover-author {
+    position: relative;
+    z-index: 2;
+    margin-top: 25px;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-shadow: 0 2px 15px rgba(0,0,0,0.4);
+    animation: fade-up 1.6s ease 0.5s both;
+  }
+
+  @keyframes fade-down {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.6;
+    animation: float-hint 2s ease-in-out infinite;
+    z-index: 2;
+  }
+
+  .scroll-hint span {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .scroll-hint::after {
+    content: '~';
+    font-size: 1.5rem;
+    color: #fff;
+  }
+
+  @keyframes float-hint {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ===================== MAIN LAYOUT ===================== */
+  .book-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===================== CHAPTERS ===================== */
+  .chapter {
+    margin-bottom: 60px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow:
+      0 10px 40px rgba(74,144,217,0.1),
+      0 2px 10px rgba(0,0,0,0.05);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: reveal 0.8s ease forwards;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .chapter::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--sky-blue), var(--sunset-pink), var(--sunset-orange));
+  }
+
+  @keyframes reveal {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .chapter-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--sky-deep);
+    margin-bottom: 8px;
+    opacity: 0.8;
+  }
+
+  .chapter-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.6rem, 4.5vw, 2.2rem);
+    color: var(--sky-deep);
+    font-weight: 700;
+    margin-bottom: 25px;
+    line-height: 1.3;
+    position: relative;
+    padding-bottom: 15px;
+  }
+
+  .chapter-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--sky-blue), var(--sunset-orange));
+    border-radius: 2px;
+  }
+
+  /* ===================== PARAGRAPH STYLES ===================== */
+  .chapter p {
+    font-size: 1.05rem;
+    color: var(--text-dark);
+    margin-bottom: 1.3em;
+    line-height: 1.9;
+  }
+
+  .chapter p.dramatic {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    font-style: italic;
+    border-left: 3px solid var(--sky-blue);
+    padding-left: 20px;
+    margin: 25px 0;
+    background: linear-gradient(90deg, rgba(135,206,235,0.1), transparent);
+  }
+
+  .chapter p.whisper {
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.3rem;
+    color: var(--sky-deep);
+    margin: 28px 0;
+  }
+
+  .chapter p.magical {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    color: var(--sunset-orange);
+    margin: 25px 0;
+  }
+
+  /* Short punchy lines */
+  .punch-line {
+    display: block;
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    color: var(--sky-deep);
+    margin: 20px 0;
+  }
+
+  /* ===================== DIVIDER ===================== */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin: 40px 0;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--sky-blue));
+  }
+
+  .divider::after {
+    background: linear-gradient(90deg, var(--sky-blue), transparent);
+  }
+
+  .divider span {
+    font-size: 1.2rem;
+    color: var(--sky-blue);
+  }
+
+  /* ===================== BACK COVER ===================== */
+  .back-cover {
+    padding: 50px 40px;
+    background: linear-gradient(135deg,
+      rgba(135,206,235,0.15) 0%,
+      rgba(255,255,255,0.95) 50%,
+      rgba(245,169,98,0.15) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(135,206,235,0.3);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 60px;
+    box-shadow: 0 10px 40px rgba(74,144,217,0.15);
+  }
+
+  .back-cover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--sky-blue), var(--sunset-pink), var(--sunset-orange));
+  }
+
+  .back-cover .bc-headline {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    color: var(--sky-deep);
+    line-height: 1.4;
+    margin-bottom: 25px;
+  }
+
+  .back-cover .bc-body {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--text-soft);
+    max-width: 520px;
+    margin: 0 auto 25px;
+  }
+
+  .back-cover .bc-quote {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    color: var(--sunset-orange);
+    margin: 30px 0;
+    font-style: italic;
+  }
+
+  .author-bio {
+    margin-top: 35px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(135,206,235,0.3);
+  }
+
+  .author-bio h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--sky-deep);
+    margin-bottom: 14px;
+  }
+
+  .author-bio p {
+    font-size: 0.95rem;
+    color: var(--text-soft);
+    line-height: 1.8;
+  }
+
+  .author-bio strong {
+    color: var(--text-dark);
+    font-family: 'Cinzel', serif;
+  }
+
+  .bc-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(135,206,235,0.2);
+  }
+
+  .bc-footer a {
+    color: var(--sky-deep);
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+
+  .bc-footer a:hover { opacity: 1; }
+
+  .bc-price {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.4rem;
+    color: var(--sunset-orange);
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .wing-circle { width: 220px; height: 220px; }
+    .chapter { padding: 28px 22px; }
+    .back-cover { padding: 35px 22px; }
+  }
 </style>
 </head>
-
 <body>
 
-<h1>A Girl Who Loved the Sky</h1>
+<!-- ==================== COVER ==================== -->
+<section class="cover">
+  <div class="wing-circle"></div>
+  <h1 class="cover-title">
+    <span class="the-girl">The Girl</span>
+    <span class="who-could">Who Could</span>
+    <span class="fly">Fly</span>
+  </h1>
+  <p class="cover-subtitle">A Story of Courage, Kindness & Magic</p>
+  <p class="cover-author">Vishresh Gupta</p>
+  <div class="scroll-hint"><span>Begin Reading</span></div>
+</section>
 
-<div class="chapter">
-<h2>Chapter 1: A Girl Who Loved the Sky</h2>
-<p>In a peaceful town surrounded by green fields and tall trees lived a curious girl named Maya. She was twelve years old and loved watching birds flying high in the sky. Every evening she climbed to the roof of her house and sat there quietly.</p>
+<!-- ==================== BOOK CONTENT ==================== -->
+<main class="book-container">
 
-<p>While other children played games, Maya looked at the clouds and imagined herself flying among them.</p>
+  <!-- ====== CHAPTER 1 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 1</div>
+    <h2 class="chapter-title">A Girl Who Loved the Sky</h2>
 
-<p>“Someday,” she whispered, “I wish I could fly like a bird.”</p>
+    <p>In a peaceful town surrounded by green fields and tall trees lived a curious girl named <strong>Maya</strong>. She was twelve years old and loved watching birds flying high in the sky. Every evening she climbed to the roof of her house and sat there quietly.</p>
 
-<p>She never knew that her wish would soon come true.</p>
-</div>
+    <p>While other children played games, Maya looked at the clouds and imagined herself flying among them.</p>
 
-<div class="chapter">
-<h2>Chapter 2: The Strange Wind</h2>
-<p>One afternoon, Maya was walking home from school when the wind suddenly started blowing very strongly.</p>
+    <p class="dramatic">"Someday," she whispered, "I wish I could fly like a bird."</p>
 
-<p>Her red scarf flew up into the air.</p>
+    <p class="magical">She never knew that her wish would soon come true.</p>
+  </article>
 
-<p>“Hey! Come back!” Maya laughed as she jumped to grab it.</p>
+  <div class="divider"><span>~</span></div>
 
-<p>But something very strange happened.</p>
+  <!-- ====== CHAPTER 2 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 2</div>
+    <h2 class="chapter-title">The Strange Wind</h2>
 
-<p>Instead of falling back down, Maya kept rising into the air.</p>
+    <p>One afternoon, Maya was walking home from school when the wind suddenly started blowing very strongly.</p>
 
-<p>Higher and higher.</p>
+    <p>Her red scarf flew up into the air.</p>
 
-<p>She looked down and gasped.</p>
+    <p class="dramatic">"Hey! Come back!" Maya laughed as she jumped to grab it.</p>
 
-<p>“My feet… they’re not touching the ground!”</p>
-</div>
+    <p>But something very strange happened.</p>
 
-<div class="chapter">
-<h2>Chapter 3: The First Flight</h2>
-<p>At first Maya felt scared. The houses below looked tiny like toy houses. Cars looked like little ants moving on the road.</p>
+    <p>Instead of falling back down, Maya kept rising into the air.</p>
 
-<p>But then she noticed something amazing.</p>
+    <p class="whisper">Higher and higher.</p>
 
-<p>When she moved her arms, her body moved in the same direction.</p>
+    <p>She looked down and gasped.</p>
 
-<p>Slowly she learned to balance herself in the air.</p>
+    <p class="dramatic">"My feet... they're not touching the ground!"</p>
+  </article>
 
-<p>She was flying.</p>
+  <div class="divider"><span>~</span></div>
 
-<p>When she finally landed safely behind a hill, she sat down and said softly,</p>
+  <!-- ====== CHAPTER 3 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 3</div>
+    <h2 class="chapter-title">The First Flight</h2>
 
-<p>“I have the power to fly!”</p>
-</div>
+    <p>At first Maya felt scared. The houses below looked tiny like toy houses. Cars looked like little ants moving on the road.</p>
 
-<div class="chapter">
-<h2>Chapter 4: Keeping the Secret</h2>
-<p>Maya decided not to tell anyone about her power.</p>
+    <p>But then she noticed something amazing.</p>
 
-<p>“What if people get scared?” she thought.</p>
+    <p>When she moved her arms, her body moved in the same direction.</p>
 
-<p>So every evening she went to a quiet hill outside the town to practice flying.</p>
+    <p>Slowly she learned to balance herself in the air.</p>
 
-<p>Day by day she became better. Soon she could fly faster than the wind and higher than the tallest trees.</p>
+    <span class="punch-line">She was flying.</span>
 
-<p>Flying made her feel free and happy.</p>
+    <p>When she finally landed safely behind a hill, she sat down and said softly,</p>
 
-<p>But she still kept her secret safe.</p>
-</div>
+    <p class="whisper">"I have the power to fly!"</p>
+  </article>
 
-<div class="chapter">
-<h2>Chapter 5: The Crying Kitten</h2>
-<p>One day Maya heard a loud “Meow!” in the park.</p>
+  <div class="divider"><span>~</span></div>
 
-<p>A small kitten was stuck on the highest branch of a tall tree.</p>
+  <!-- ====== CHAPTER 4 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 4</div>
+    <h2 class="chapter-title">Keeping the Secret</h2>
 
-<p>People tried to reach it but the branch was too high.</p>
+    <p>Maya decided not to tell anyone about her power.</p>
 
-<p>When no one was looking, Maya quietly flew up into the tree, picked up the kitten, and gently placed it on the ground.</p>
+    <p class="dramatic">"What if people get scared?" she thought.</p>
 
-<p>Everyone looked around in surprise.</p>
+    <p>So every evening she went to a quiet hill outside the town to practice flying.</p>
 
-<p>“How did the kitten come down?” someone asked.</p>
+    <p>Day by day she became better. Soon she could fly faster than the wind and higher than the tallest trees.</p>
 
-<p>Maya smiled quietly.</p>
-</div>
+    <p>Flying made her feel free and happy.</p>
 
-<div class="chapter">
-<h2>Chapter 6: The Sky Helper</h2>
-<p>Soon, strange things started happening in town.</p>
+    <p class="magical">But she still kept her secret safe.</p>
+  </article>
 
-<p>Lost balloons came back to children.</p>
+  <div class="divider"><span>~</span></div>
 
-<p>Kites stuck on buildings suddenly appeared back in their owners’ hands.</p>
+  <!-- ====== CHAPTER 5 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 5</div>
+    <h2 class="chapter-title">The Crying Kitten</h2>
 
-<p>A hat blown away by the wind returned safely.</p>
+    <p>One day Maya heard a loud "Meow!" in the park.</p>
 
-<p>People began talking about a mysterious helper.</p>
+    <p>A small kitten was stuck on the highest branch of a tall tree.</p>
 
-<p>They called the unknown hero “The Sky Helper.”</p>
+    <p>People tried to reach it but the branch was too high.</p>
 
-<p>Only Maya knew the truth.</p>
-</div>
+    <p>When no one was looking, Maya quietly flew up into the tree, picked up the kitten, and gently placed it on the ground.</p>
 
-<div class="chapter">
-<h2>Chapter 7: The Big Storm</h2>
-<p>One night, a heavy storm hit the town. Rain poured down and strong winds shook the houses.</p>
+    <p>Everyone looked around in surprise.</p>
 
-<p>Some roads were flooded and people could not leave their homes.</p>
+    <p class="dramatic">"How did the kitten come down?" someone asked.</p>
 
-<p>Maya knew she had to help.</p>
+    <p class="whisper">Maya smiled quietly.</p>
+  </article>
 
-<p>She flew across the town carrying food, medicine, and blankets to people who needed them.</p>
+  <div class="divider"><span>~</span></div>
 
-<p>From the dark sky, she helped everyone safely.</p>
-</div>
+  <!-- ====== CHAPTER 6 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 6</div>
+    <h2 class="chapter-title">The Sky Helper</h2>
 
-<div class="chapter">
-<h2>Chapter 8: A Brave Rescue</h2>
-<p>During the storm, Maya heard someone shouting for help.</p>
+    <p>Soon, strange things started happening in town.</p>
 
-<p>A small boy was trapped on a rooftop because the water had filled the street below.</p>
+    <p>Lost balloons came back to children.</p>
 
-<p>Without wasting a second, Maya flew through the heavy rain.</p>
+    <p>Kites stuck on buildings suddenly appeared back in their owners' hands.</p>
 
-<p>She gently lifted the boy and carried him to safety.</p>
+    <p>A hat blown away by the wind returned safely.</p>
 
-<p>The boy looked up at the sky in amazement.</p>
+    <p>People began talking about a mysterious helper.</p>
 
-<p>“An angel saved me,” he said.</p>
+    <span class="punch-line">They called the unknown hero "The Sky Helper."</span>
 
-<p>Maya quietly flew away into the night.</p>
-</div>
+    <p class="magical">Only Maya knew the truth.</p>
+  </article>
 
-<div class="chapter">
-<h2>Chapter 9: Flying Among the Stars</h2>
-<p>After the storm ended, Maya flew high above the town.</p>
+  <div class="divider"><span>~</span></div>
 
-<p>The night sky was full of shining stars and the moon glowed brightly.</p>
+  <!-- ====== CHAPTER 7 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 7</div>
+    <h2 class="chapter-title">The Big Storm</h2>
 
-<p>From above, the town looked peaceful and beautiful.</p>
+    <p>One night, a heavy storm hit the town. Rain poured down and strong winds shook the houses.</p>
 
-<p>Maya realized something very important.</p>
+    <p>Some roads were flooded and people could not leave their homes.</p>
 
-<p>Her power was not just for fun.</p>
+    <p>Maya knew she had to help.</p>
 
-<p>It was meant to help others.</p>
-</div>
+    <p>She flew across the town carrying food, medicine, and blankets to people who needed them.</p>
 
-<div class="chapter">
-<h2>Chapter 10: The Secret Hero</h2>
-<p>Life in the town returned to normal.</p>
+    <p class="magical">From the dark sky, she helped everyone safely.</p>
+  </article>
 
-<p>People still talked about the mysterious Sky Helper, but no one knew who it was.</p>
+  <div class="divider"><span>~</span></div>
 
-<p>Every night, Maya still flew across the sky, watching over the town.</p>
+  <!-- ====== CHAPTER 8 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 8</div>
+    <h2 class="chapter-title">A Brave Rescue</h2>
 
-<p>Whenever someone needed help, a small shadow could be seen flying across the moon.</p>
+    <p>During the storm, Maya heard someone shouting for help.</p>
 
-<p>And deep in her heart, Maya felt proud.</p>
+    <p>A small boy was trapped on a rooftop because the water had filled the street below.</p>
 
-<p>Because sometimes the greatest heroes are the ones no one sees.</p>
-</div>
+    <p>Without wasting a second, Maya flew through the heavy rain.</p>
 
-<p class="end">✨ The End ✨</p>
+    <p>She gently lifted the boy and carried him to safety.</p>
+
+    <p>The boy looked up at the sky in amazement.</p>
+
+    <p class="dramatic">"An angel saved me," he said.</p>
+
+    <p class="whisper">Maya quietly flew away into the night.</p>
+  </article>
+
+  <div class="divider"><span>~</span></div>
+
+  <!-- ====== CHAPTER 9 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 9</div>
+    <h2 class="chapter-title">Flying Among the Stars</h2>
+
+    <p>After the storm ended, Maya flew high above the town.</p>
+
+    <p>The night sky was full of shining stars and the moon glowed brightly.</p>
+
+    <p>From above, the town looked peaceful and beautiful.</p>
+
+    <p>Maya realized something very important.</p>
+
+    <p class="dramatic">Her power was not just for fun.</p>
+
+    <span class="punch-line">It was meant to help others.</span>
+  </article>
+
+  <div class="divider"><span>~</span></div>
+
+  <!-- ====== CHAPTER 10 ====== -->
+  <article class="chapter">
+    <div class="chapter-label">Chapter 10</div>
+    <h2 class="chapter-title">The Secret Hero</h2>
+
+    <p>Life in the town returned to normal.</p>
+
+    <p>People still talked about the mysterious <strong>Sky Helper</strong>, but no one knew who it was.</p>
+
+    <p>Every night, Maya still flew across the sky, watching over the town.</p>
+
+    <p>Whenever someone needed help, a small shadow could be seen flying across the moon.</p>
+
+    <p>And deep in her heart, Maya felt proud.</p>
+
+    <p class="whisper">Because sometimes the greatest heroes are the ones no one sees.</p>
+
+    <p style="text-align:center; margin-top:40px; font-family:'Dancing Script',cursive; font-size:1.8rem; color:var(--sunset-orange);">The End</p>
+  </article>
+
+  <!-- ==================== BACK COVER ==================== -->
+  <div class="back-cover">
+    <h2 class="bc-headline">A Story of Dreams Taking Flight</h2>
+
+    <p class="bc-body">When a quiet, curious girl named <strong style="color:var(--text-dark);">Maya</strong> discovers she can fly, she decides to use her power to help others. From rescuing a stranded kitten to aiding her town during a storm, Maya becomes the mysterious "Sky Helper."</p>
+
+    <p class="bc-body">But her true identity remains a secret.</p>
+
+    <p class="bc-quote">"Because sometimes the greatest heroes are the ones no one sees."</p>
+
+    <div class="author-bio">
+      <h4>About the Author</h4>
+      <p><strong>Vishresh Gupta</strong> is a storyteller who believes every child carries a hidden power. His stories exist to remind them of that truth. <em>The Girl Who Could Fly</em> is a heartwarming adventure about courage, kindness, and the magic of helping others.</p>
+    </div>
+
+    <div class="bc-footer">
+      <a href="http://www.authorvishresh.com" target="_blank">www.authorvishresh.com</a>
+      <span class="bc-price">Rs.50</span>
+    </div>
+  </div>
+
+</main>
 
 </body>
 </html>
