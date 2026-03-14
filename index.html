@@ -3,7 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vishresh Gupta — E-Book Store</title>
+<title>Vishresh Gupta — E-Book Store | Children's Books & Young Adult Fiction</title>
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="Discover magical e-books by Vishresh Gupta. Young adult fantasy, children's adventure stories about flying, teleportation & mystery. Read online for just Rs.50.">
+<meta name="keywords" content="Vishresh Gupta, e-books, children books, young adult fiction, fantasy books, Indian author, The Boy Who Could Step Through Shadows, The Girl Who Could Fly, The Horror Village">
+<meta name="author" content="Vishresh Gupta">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vishresh-gupta.github.io/">
+<meta property="og:title" content="Vishresh Gupta — E-Book Store">
+<meta property="og:description" content="Discover magical e-books by Vishresh Gupta. Young adult fantasy & children's adventure stories. Read online for just Rs.50.">
+<meta property="og:image" content="https://vishresh-gupta.github.io/vishresh.jpg">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vishresh Gupta — E-Book Store">
+<meta name="twitter:description" content="Discover magical e-books by Vishresh Gupta. Young adult fantasy & children's adventure stories.">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://vishresh-gupta.github.io/">
+
+<!-- Structured Data for Author -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Vishresh Gupta",
+  "url": "https://vishresh-gupta.github.io",
+  "image": "https://vishresh-gupta.github.io/vishresh.jpg",
+  "jobTitle": "Author",
+  "description": "Storyteller who loves creating imaginative worlds filled with adventure, mystery, action, and powerful characters.",
+  "sameAs": ["http://www.authorvishresh.com"]
+}
+</script>
+
+<!-- Structured Data for Books -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [
+    {
+      "@type": "Book",
+      "position": 1,
+      "name": "The Boy Who Could Step Through Shadows",
+      "author": {"@type": "Person", "name": "Vishresh Gupta"},
+      "genre": ["Young Adult", "Fantasy", "Adventure"],
+      "description": "A twelve-year-old discovers he can teleport and becomes the target of a powerful secret organization."
+    },
+    {
+      "@type": "Book",
+      "position": 2,
+      "name": "The Girl Who Could Fly",
+      "author": {"@type": "Person", "name": "Vishresh Gupta"},
+      "genre": ["Children", "Fantasy", "Adventure"],
+      "description": "Maya discovers she can fly and becomes the mysterious Sky Helper in her town."
+    },
+    {
+      "@type": "Book",
+      "position": 3,
+      "name": "The Horror Village",
+      "author": {"@type": "Person", "name": "Vishresh Gupta"},
+      "genre": ["Horror", "Mystery", "Thriller"],
+      "description": "A brave boy named Kabir uncovers the terrifying secret of a cursed village."
+    }
+  ]
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -534,6 +603,23 @@ nav {
 }
 .bc-read-btn:hover { background: var(--accent2); gap: 10px; }
 
+.bc-download-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: transparent;
+  padding: 9px 16px;
+  text-decoration: none;
+  border: 1.5px solid var(--ink2);
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+}
+.bc-download-btn:hover { background: var(--ink); color: var(--bg); }
+
 /* ─── SPOTLIGHT ─── */
 .spotlight {
   background: var(--ink);
@@ -940,8 +1026,9 @@ footer {
     <div class="bc-footer-row">
       <span class="bc-price">₹50</span>
       <span class="bc-format-tag">HTML E-Book</span>
+      <a href="girl-who-love-the-sky.html" class="bc-download-btn" download>Download</a>
       <a href="girl-who-love-the-sky.html" class="bc-read-btn" target="_blank">
-        Open E-Book →
+        Read Now →
       </a>
     </div>
   </div>
@@ -962,7 +1049,8 @@ footer {
       <div class="bc-footer-row">
         <span class="bc-price">₹50</span>
         <span class="bc-format-tag">HTML E-Book</span>
-        <a href="the-boy-who-could-step-through-shadows.html" class="bc-read-btn" target="_blank">Open E-Book →</a>
+        <a href="the-boy-who-could-step-through-shadows.html" class="bc-download-btn" download>Download</a>
+        <a href="the-boy-who-could-step-through-shadows.html" class="bc-read-btn" target="_blank">Read Now →</a>
       </div>
     </div>
   </div>
@@ -981,9 +1069,10 @@ footer {
         <p class="bc-desc">Deep in a dark forest lies Shadowvale, a village cursed by a terrifying legend. When brave young Kabir investigates the eerie midnight footsteps, he discovers a shocking secret that changes everything.</p>
       </div>
       <div class="bc-footer-row">
-        <span class="bc-price">Rs.50</span>
+        <span class="bc-price">₹50</span>
         <span class="bc-format-tag">HTML E-Book</span>
-        <a href="the-horror-village.html" class="bc-read-btn" target="_blank">Open E-Book →</a>
+        <a href="the-horror-village.html" class="bc-download-btn" download>Download</a>
+        <a href="the-horror-village.html" class="bc-read-btn" target="_blank">Read Now →</a>
       </div>
     </div>
   </div>
